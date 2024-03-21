@@ -1,0 +1,29 @@
+---
+import { Sun, Moon } from "lucide-svelte";
+import { themes, darkTheme } from "../constants/themes";
+
+const dataToggleTheme = themes.join(",");
+---
+
+<label class="swap swap-rotate">
+  <input
+    id="theme-checkbox"
+    type="checkbox"
+    data-toggle-theme={dataToggleTheme}
+    aria-label="Toggle between light and dark mode"
+  />
+
+  <Moon class="swap-off w-10 h-10 fill-current" />
+
+  <Sun class="swap-on w-10 h-10 fill-current" />
+</label>
+
+<script define:vars={{ darkTheme }}>
+  const theme = localStorage.getItem("theme");
+  const isDarkTheme = theme === darkTheme;
+  const themeCheckbox = document.getElementById("theme-checkbox");
+
+  if (isDarkTheme && themeCheckbox) {
+    themeCheckbox.setAttribute("checked", "true");
+  }
+</script>
