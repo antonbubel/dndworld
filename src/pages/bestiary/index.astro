@@ -1,12 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { PawPrint } from "lucide-astro";
 
 const title = `Бестиарий | D&D Wiki`;
 const description = `Добро пожаловать в Реневон!`;
 ---
 
 <Layout {title} {description}>
-  <div class="flex gap-2">
+  <div class="flex gap-4">
+    <PawPrint size={40} />
     <h1>Бестиарий</h1>
   </div>
 </Layout>

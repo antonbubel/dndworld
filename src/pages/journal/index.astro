@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { NotebookText } from "lucide-astro";
+
+const title = `Журнал | D&D Wiki`;
+const description = `Истории предыдущих приключений.`;
+---
+
+<Layout {title} {description}>
+  <div class="flex gap-4">
+    <NotebookText size={40} />
+    <h1>Журнал</h1>
+  </div>
+</Layout>
