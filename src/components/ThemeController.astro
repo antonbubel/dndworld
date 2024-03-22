@@ -1,5 +1,5 @@
 ---
-import { darkTheme, lightTheme, systemTheme } from "../themes";
+import { themes, darkTheme, lightTheme, systemTheme } from "../themes";
 ---
 
 <div class="flex items-center gap-2 text-sm">
@@ -9,8 +9,11 @@ import { darkTheme, lightTheme, systemTheme } from "../themes";
     class="select-base-200 select select-bordered select-sm"
   >
     <option value={systemTheme}>System</option>
-    <option value={darkTheme}>Dark</option>
-    <option value={lightTheme}>Light</option>
+    {
+      themes.map((theme) => (
+        <option value={theme.name}>{theme.displayName}</option>
+      ))
+    }
   </select>
 </div>
 
