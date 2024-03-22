@@ -13,7 +13,7 @@ export default {
         "serif",
       ],
       sans: [
-        "Source Sans Pro",
+        "Montserrat Variable",
         "ui-sans",
         "system-ui",
         "-apple-system",
