@@ -1,15 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ThemeChanger from "../components/ThemeChanger.astro";
 
-const title = `D&D World Wiki`;
-const description = `Renevon's D&D World Wiki. A collection of information about the world of our D&D campaign.`;
+const title = `Главная | D&D Wiki`;
+const description = `Добро пожаловать в Реневон!`;
 ---
 
 <Layout {title} {description}>
-  <main class="relative container min-h-screen w-screen flex flex-col py-12 gap-6">
-    <div class="flex justify-center">
-      <ThemeChanger />
-    </div>
-  </main>
+  <h1 class="text-4xl font-bold">Welcome to the D&D Wiki!</h1>
 </Layout>

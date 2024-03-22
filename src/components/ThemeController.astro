@@ -1,0 +1,60 @@
+---
+import { darkTheme, lightTheme, systemTheme } from "../constants/themes";
+---
+
+<div class="flex items-center gap-2 text-sm">
+  <p class="flex-1">Theme</p>
+  <select
+    id="theme-controller"
+    class="select-base-200 select select-bordered select-sm"
+  >
+    <option value={systemTheme}>System</option>
+    <option value={darkTheme}>Dark</option>
+    <option value={lightTheme}>Light</option>
+  </select>
+</div>
+
+<script
+  is:inline
+  data-astro-rerun
+  define:vars={{ darkTheme, lightTheme, systemTheme }}
+>
+  function getTheme(theme) {
+    if (!theme || theme === systemTheme) {
+      const isDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      return isDarkMode ? darkTheme : lightTheme;
+    }
+
+    return theme;
+  }
+
+  function listenForThemeChange() {
+    const themeController = document.getElementById("theme-controller");
+
+    if (themeController) {
+      themeController.addEventListener("change", (e) => {
+        const theme = e.target.value;
+        const dataTheme = getTheme(theme);
+        document.documentElement.setAttribute("data-theme", dataTheme);
+        localStorage.setItem("theme", theme);
+      });
+    }
+  }
+
+  function setStoredTheme() {
+    const themeController = document.getElementById("theme-controller");
+    const savedTheme = localStorage.getItem("theme");
+    const dataTheme = getTheme(savedTheme);
+
+    if (themeController) {
+      document.documentElement.setAttribute("data-theme", dataTheme);
+      themeController.value = savedTheme || systemTheme;
+    }
+  }
+
+  setStoredTheme();
+  listenForThemeChange();
+</script>

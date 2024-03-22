@@ -1,0 +1,3 @@
+html:has(.drawer-auto-gutter .drawer-toggle:checked) {
+  scrollbar-gutter: auto;
+}

@@ -1,37 +1,23 @@
 ---
-import { darkTheme, lightTheme } from "../constants/themes";
+import "@fontsource/cormorant-sc";
+import "@fontsource/source-sans-pro";
+
+import "../global.css";
+
+import { ViewTransitions } from "astro:transitions";
+
+import Drawer from "../components/Drawer.astro";
 
 interface Props {
-	title: string;
+  title: string;
   description?: string | undefined;
 }
 
 const { title, description } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en" data-theme="night">
+<html lang="ru" data-theme="night">
   <head>
-    <!-- Theme change -->
-    <script is:inline define:vars={{ darkTheme, lightTheme }}>
-      let theme = localStorage.getItem("theme");
-
-      if (!theme) {
-        const isDarkMode = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-
-        theme = isDarkMode ? darkTheme : lightTheme;
-      }
-
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-    </script>
-    <script>
-      import { themeChange } from "theme-change";
-      themeChange();
-    </script>
-
     <!-- Meta tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -51,8 +37,15 @@ const { title, description } = Astro.props;
 
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <ViewTransitions />
   </head>
-  <body>
-    <slot />
+
+  <body class="relative w-screen min-h-screen">
+    <Drawer>
+      <main class="py-12 container prose prose-headings:font-serif prose-a:no-underline">
+        <slot />
+      </main>
+    </Drawer>
   </body>
 </html>
