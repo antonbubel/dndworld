@@ -33,7 +33,7 @@ export default {
       ],
     },
     container: {
-      center: true,
+      center: false,
       padding: {
         DEFAULT: "1rem",
         sm: "2rem",
@@ -46,7 +46,6 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: "unset",
           },
         },
       },
