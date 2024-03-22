@@ -1,6 +1,6 @@
 ---
 import "@fontsource/cormorant-sc";
-import '@fontsource-variable/montserrat';
+import "@fontsource-variable/montserrat";
 
 import "../global.css";
 
@@ -16,7 +16,7 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<html lang="ru" data-theme="night">
+<html class="overflow-x-hidden" lang="ru" data-theme="night">
   <head>
     <!-- Meta tags -->
     <meta charset="UTF-8" />
@@ -43,7 +43,7 @@ const { title, description } = Astro.props;
 
   <body class="relative w-screen min-h-screen">
     <Drawer>
-      <main class="py-12 container prose prose-a:no-underline">
+      <main class="py-8 lg:py-10 container prose prose-a:no-underline">
         <slot />
       </main>
     </Drawer>
