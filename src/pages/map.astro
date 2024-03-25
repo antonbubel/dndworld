@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Map } from "lucide-astro";
+import { Map as MapIcon } from "lucide-astro";
 
 const title = `Карта мира | D&D Wiki`;
 const description = `Карта Реневона`;
@@ -11,7 +11,7 @@ import "ol/ol.css";
 <Layout {title} {description}>
   <div class="prose">
     <div class="flex gap-4">
-      <Map size={40} />
+      <MapIcon size={40} />
       <h1>Карта мира</h1>
     </div>
   </div>
