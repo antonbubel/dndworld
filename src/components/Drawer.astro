@@ -1,7 +1,20 @@
 ---
-import { Menu, Earth, Map, UsersRound, PawPrint, LibraryBig, Zap, NotebookText } from "lucide-astro";
+import {
+  Menu,
+  Earth,
+  Map,
+  UsersRound,
+  PawPrint,
+  LibraryBig,
+  Zap,
+  NotebookText,
+} from "lucide-astro";
+
 import Swords from "./icons/Swords.astro";
 import ThemeController from "./ThemeController.astro";
+import { getCollection } from "astro:content";
+
+const regionCollection = await getCollection("region");
 ---
 
 <div class="drawer lg:drawer-open drawer-auto-gutter">
@@ -38,29 +51,53 @@ import ThemeController from "./ThemeController.astro";
         </li>
       </ul>
 
-      <ul class="flex-auto menu p-0">
+      <ul transition:persist class="flex-auto menu p-0">
         <li>
-          <a href="/world"><Earth /> Мир </a>
-        </li>
-        <li>
-          <a href="/map"><Map /> Карта мира </a>
-        </li>
-        <li>
-          <a href="/pantheon"><Zap /> Божества </a>
-        </li>
-        <li>
-          <a href="/population"><UsersRound /> Население </a>
-        </li>
-        <li>
-          <a href="/bestiary"><PawPrint /> Бестиарий </a>
-        </li>
-        <li>
-          <a href="/legends"><LibraryBig /> Легенды </a>
-        </li>
-        <li>
-          <a href="/journal"><NotebookText /> <span class="italic">Журнал</span> </a>
+          <details>
+            <summary class="flex"><Earth /> Мир </summary>
+            <ul>
+              <li><a href="/world">Общая информация</a></li>
+              <li><a href="/world/map">Карта мира </a></li>
+              <li>
+                <details>
+                  <summary>Регионы</summary>
+                  <ul>
+                    {
+                      regionCollection
+                        .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+                        .map((region) => (
+                          <li>
+                            <a href={`/world/regions/${region.slug}`}>
+                              {region.data.title}
+                            </a>
+                          </li>
+                        ))
+                    }
+                  </ul>
+                </details>
+              </li>
+            </ul>
+          </details>
+          <li>
+            <a href="/pantheon"><Zap /> Божества </a>
+          </li>
+          <li>
+            <a href="/population"><UsersRound /> Население </a>
+          </li>
+          <li>
+            <a href="/bestiary"><PawPrint /> Бестиарий </a>
+          </li>
+          <li>
+            <a href="/legends"><LibraryBig /> Легенды </a>
+          </li>
+          <li>
+            <a href="/journal"
+              ><NotebookText /> <span class="italic">Журнал</span>
+            </a>
+          </li>
         </li>
       </ul>
+
       <div>
         <ThemeController />
       </div>
