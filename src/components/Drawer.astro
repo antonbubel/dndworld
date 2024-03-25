@@ -51,7 +51,7 @@ const regionCollection = await getCollection("region");
         </li>
       </ul>
 
-      <ul transition:persist class="flex-auto menu p-0">
+      <ul id="nav" transition:persist class="flex-auto menu p-0">
         <li>
           <details>
             <summary class="flex"><Earth /> Мир </summary>
@@ -104,3 +104,49 @@ const regionCollection = await getCollection("region");
     </div>
   </div>
 </div>
+
+<script>
+  function openActiveTree() {
+    const activeLink = document.querySelector("#nav a.active");
+    const navElement = document.querySelector("#nav");
+
+    if (activeLink) {
+      openClosedDetails(activeLink, navElement);
+    }
+  }
+
+  function openClosedDetails(
+    childElement: Element,
+    stopElement: Element | null = null
+  ) {
+    const parentElement = childElement.parentElement;
+
+    if (parentElement && parentElement !== stopElement) {
+      if (parentElement.tagName === "DETAILS") {
+        const detailsElement = parentElement as HTMLDetailsElement;
+        detailsElement.open = true;
+      }
+
+      openClosedDetails(parentElement);
+    }
+  }
+
+  function setActiveLink() {
+    const navLinks = document.querySelectorAll("#nav a");
+
+    navLinks.forEach((link) => {
+      const linkElement = link as HTMLAnchorElement;
+
+      linkElement.classList.remove("active");
+
+      if (window.location.pathname === linkElement.pathname) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  setActiveLink();
+  openActiveTree();
+
+  document.addEventListener("astro:after-swap", setActiveLink);
+</script>
