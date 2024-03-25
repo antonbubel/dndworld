@@ -1,5 +1,5 @@
 ---
-import { Menu, Earth, BookUser, PawPrint, NotebookText } from "lucide-astro";
+import { Menu, Earth, Map, UsersRound, PawPrint, LibraryBig, Zap, NotebookText } from "lucide-astro";
 import Swords from "./icons/Swords.astro";
 import ThemeController from "./ThemeController.astro";
 ---
@@ -29,7 +29,7 @@ import ThemeController from "./ThemeController.astro";
     >
       <ul class="menu p-0">
         <li>
-          <a href="./" class="prose flex items-center gap-2">
+          <a href="/" class="prose flex items-center gap-2">
             <Swords class="w-8" />
             <h2 class="font-serif m-0 text-4xl active:text-neutral-content">
               D&D Wiki
@@ -40,16 +40,25 @@ import ThemeController from "./ThemeController.astro";
 
       <ul class="flex-auto menu p-0">
         <li>
-          <a href="./world"><Earth /> Мир </a>
+          <a href="/world"><Earth /> Мир </a>
         </li>
         <li>
-          <a href="./characters"><BookUser /> Персонажи </a>
+          <a href="/map"><Map /> Карта мира </a>
         </li>
         <li>
-          <a href="./bestiary"><PawPrint /> Бестиарий </a>
+          <a href="/pantheon"><Zap /> Божества </a>
         </li>
         <li>
-          <a href="./journal"><NotebookText /> <span class="italic">Журнал</span> </a>
+          <a href="/population"><UsersRound /> Население </a>
+        </li>
+        <li>
+          <a href="/bestiary"><PawPrint /> Бестиарий </a>
+        </li>
+        <li>
+          <a href="/legends"><LibraryBig /> Легенды </a>
+        </li>
+        <li>
+          <a href="/journal"><NotebookText /> <span class="italic">Журнал</span> </a>
         </li>
       </ul>
       <div>

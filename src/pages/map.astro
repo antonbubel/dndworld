@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Map } from "lucide-astro";
+
+const title = `Карта мира | D&D Wiki`;
+const description = `Карта Реневона`;
+
+import "ol/ol.css";
+---
+
+<Layout {title} {description}>
+  <div class="prose">
+    <div class="flex gap-4">
+      <Map size={40} />
+      <h1>Карта мира</h1>
+    </div>
+  </div>
+  <div id="map" class="map h-[40rem] lg:h-[48rem]"></div>
+</Layout>
+
+<script>
+  import Map from "ol/Map";
+  import View from "ol/View";
+  import TileLayer from "ol/layer/Tile";
+  import TileGrid from "ol/tilegrid/TileGrid";
+  import XYZ from "ol/source/XYZ";
+  import { FullScreen, defaults as defaultControls } from "ol/control";
+
+  function createMap() {
+    new Map({
+      target: "map",
+      controls: defaultControls().extend([new FullScreen()]),
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            tileGrid: new TileGrid({
+              extent: [0, -1536, 2048, 0],
+              origin: [0, -1536],
+              resolutions: [8, 4, 2, 1],
+              tileSize: [256, 256],
+            }),
+            tileUrlFunction: function (tileCoord) {
+              return "/map/{z}/{x}/{y}.png"
+                .replace("{z}", String(tileCoord[0]))
+                .replace("{x}", String(tileCoord[1]))
+                .replace("{y}", String(-1 - tileCoord[2]));
+            },
+          }),
+        }),
+      ],
+      view: new View({
+        center: [1024.0, -768.0],
+        resolution: 1.3,
+      }),
+    });
+  }
+
+  createMap();
+
+  document.addEventListener("astro:after-swap", createMap);
+</script>
