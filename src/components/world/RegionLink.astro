@@ -1,0 +1,14 @@
+---
+interface Props {
+  region: {
+    slug: string;
+    data: {
+      title: string;
+    };
+  };
+}
+
+const { region } = Astro.props;
+---
+
+{region && <a href={`/world/regions/${region.slug}`}>{region.data.title}</a>}
