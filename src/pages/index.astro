@@ -2,18 +2,24 @@
 import Layout from "../layouts/Layout.astro";
 
 const title = `Главная | D&D Wiki`;
-const description = `Добро пожаловать в Первый свет!
+const description = `Добро пожаловать в Реневон!
   Эта Вики содержит всю информацию о мире и всю информацию о том, что в нём есть.`;
 ---
 
 <Layout {title} {description}>
   <div class="prose">
-    <h1>Добро пожаловать в Первый свет!</h1>
+    <div class="flex flex-col lg:flex-col-reverse">
+      <h1 class="pr-16 lg:pr-0">Добро пожаловать в Реневон!</h1>
+
+      <img
+        src="/main.webp"
+        alt="Главная страница"
+        class="rounded mt-0 w-full max-h-96 object-cover"
+      />
+    </div>
     <blockquote>
       На этом сайте ты найдёшь всю информацию о Первом Свете и всю информацию о
       том, что в нём есть.
-      <br />
-      Добро пожаловать в Первый Свет и Реневон!
     </blockquote>
   </div>
 </Layout>
