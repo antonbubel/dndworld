@@ -1,0 +1,163 @@
+---
+import { ChevronLeft, ChevronRight } from "lucide-astro";
+---
+
+<div class="w-full flex flex-col-reverse lg:flex-row justify-between gap-2">
+  <a id="prev-page" href="#" class="btn flex">
+    <ChevronLeft size="20" />
+    <div class="flex flex-col items-start">
+      <span class="text-[0.6rem]">Предыдущая страница</span>
+      <span class="text-sm page-name">...</span>
+    </div>
+  </a>
+
+  <a id="next-page" href="#" class="btn lg:ml-auto">
+    <div class="flex flex-col items-start">
+      <span class="text-[0.6rem]">Следующая страница</span>
+      <span class="text-sm page-name">...</span>
+    </div>
+    <ChevronRight size="20" />
+  </a>
+</div>
+
+<script>
+  function togglePrevPageControl(isVisible: boolean) {
+    const prevPage = document.getElementById("prev-page");
+    if (prevPage) {
+      prevPage.classList.toggle("hidden", !isVisible);
+    }
+  }
+
+  function toggleNextPageControl(isVisible: boolean) {
+    const nextPage = document.getElementById("next-page");
+    if (nextPage) {
+      nextPage.classList.toggle("hidden", !isVisible);
+    }
+  }
+
+  function findNextLink(
+    activeElement: Element,
+    stopElement: Element | null = null
+  ): Element | null {
+    const parent = activeElement.parentElement;
+
+    if (activeElement === stopElement || !parent) {
+      return null;
+    }
+
+    const childElements = parent.children;
+    let activeElementFound = false;
+
+    for (let i = 0; i < childElements.length; ++i) {
+      if (childElements[i] === activeElement) {
+        activeElementFound = true;
+        continue;
+      }
+
+      if (!activeElementFound) {
+        continue;
+      }
+
+      if (childElements[i].tagName === "A") {
+        return childElements[i];
+      }
+
+      const childLinkElement = childElements[i].querySelector("a");
+
+      if (childLinkElement) {
+        return childLinkElement;
+      }
+    }
+
+    return findNextLink(parent, stopElement);
+  }
+
+  function findPrevLink(
+    activeElement: Element,
+    stopElement: Element | null = null
+  ): Element | null {
+    const parent = activeElement.parentElement;
+
+    if (activeElement === stopElement || !parent) {
+      return null;
+    }
+
+    const childElements = parent.children;
+
+    let activeElementIndex = -1;
+
+    for (let i = 0; i < childElements.length; ++i) {
+      if (childElements[i] === activeElement) {
+        activeElementIndex = i;
+        break;
+      }
+    }
+
+    for (let i = activeElementIndex - 1; i >= 0; --i) {
+      if (childElements[i].tagName === "A") {
+        return childElements[i];
+      }
+
+      const childLinkElements = childElements[i].querySelectorAll("a");
+
+      if (childLinkElements.length > 0) {
+        return childLinkElements[childLinkElements.length - 1];
+      }
+    }
+
+    return findPrevLink(parent, stopElement);
+  }
+
+  function setNextLink(navElement: Element | null | undefined) {
+    const navLink = navElement as HTMLAnchorElement;
+
+    if (navLink) {
+      const nextPage = document.getElementById("next-page");
+      const nextPageText = document.querySelector("#next-page span.page-name");
+
+      if (nextPage && nextPageText) {
+        nextPage.setAttribute("href", navLink.href);
+        nextPageText.textContent = navLink.textContent;
+      }
+    } else {
+      toggleNextPageControl(false);
+    }
+  }
+
+  function setPrevLink(navElement: Element | null | undefined) {
+    const navLink = navElement as HTMLAnchorElement;
+
+    if (navLink) {
+      const prevPage = document.getElementById("prev-page");
+      const prevPageText = prevPage?.querySelector("span.page-name");
+
+      if (prevPage && prevPageText) {
+        prevPage.setAttribute("href", navLink.href);
+        prevPageText.textContent = navLink.textContent;
+      }
+    } else {
+      togglePrevPageControl(false);
+    }
+  }
+
+  function setReadControls() {
+    toggleNextPageControl(true);
+    togglePrevPageControl(true);
+
+    const navElement = document.getElementById("nav");
+    const activeLink = document.querySelector("#nav a.active");
+
+    if (navElement && activeLink) {
+      const nextLink = findNextLink(activeLink, navElement);
+      const prevLink = findPrevLink(activeLink, navElement);
+
+      setNextLink(nextLink);
+      setPrevLink(prevLink);
+    } else {
+      togglePrevPageControl(false);
+      setNextLink(navElement?.querySelector("a"));
+    }
+  }
+
+  document.addEventListener("nav:active-link-set", setReadControls);
+</script>

@@ -1,4 +1,5 @@
 ---
+import ReadControls from "@components/ReadControls.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -37,4 +38,8 @@ const metadataTitle = `${title} | D&D Wiki`;
   </div>
 
   <slot name="after-prose" />
+
+  <div class="mt-8 lg:mt-10 prose prose-a:no-underline">
+    <ReadControls />
+  </div>
 </BaseLayout>

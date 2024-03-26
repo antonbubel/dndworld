@@ -172,10 +172,15 @@ const pageHierarchy = await getPageHierarchy();
         link.classList.add("active");
       }
     });
+
+    document.dispatchEvent(new Event("nav:active-link-set"));
   }
 
   setActiveLink();
   openActiveTree();
 
-  document.addEventListener("astro:after-swap", setActiveLink);
+  document.addEventListener("astro:after-swap", () => {
+    setActiveLink();
+    openActiveTree();
+  });
 </script>
