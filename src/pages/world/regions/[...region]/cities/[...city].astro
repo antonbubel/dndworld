@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const regionsCollection = await getCollection("regions");
+  const citiesCollection = await getCollection("cities");
+
+  return citiesCollection.map((city) => {
+    const region = regionsCollection.find(
+      (region) => city.data.region === region.slug
+    );
+
+    if (!region) {
+      return {
+        params: {
+          city: city.slug,
+        },
+      };
+    }
+
+    return {
+      params: {
+        region: region.slug,
+        city: city.slug,
+      },
+      props: { city, region },
+    };
+  });
+}
+
+const { city, region } = Astro.props;
+const { Content } = await city.render();
+
+const description = `${city.data.title} - город в регионе ${region.data.title}.`;
+---
+
+<TextPageLayout title={city.data.title} {description} image={city.data.image}>
+  <p>
+    Регион: <a href={`/world/regions/${region.slug}`}>{region.data.title}</a>
+  </p>
+  <div class="divider"></div>
+  <Content />
+</TextPageLayout>

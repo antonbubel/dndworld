@@ -1,0 +1,23 @@
+---
+interface Props {
+  city: {
+    slug: string;
+    data: {
+      title: string;
+    };
+  };
+  region: {
+    slug: string;
+  };
+}
+
+const { city, region } = Astro.props;
+---
+
+{
+  city && region && (
+    <a href={`/world/regions/${region.slug}/cities/${city.slug}`}>
+      {city.data.title}
+    </a>
+  )
+}

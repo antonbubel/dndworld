@@ -12,9 +12,9 @@ import {
 
 import Swords from "./icons/Swords.astro";
 import ThemeController from "./ThemeController.astro";
-import { getCollection } from "astro:content";
+import { getPageHierarchy } from "../page-hierarchy";
 
-const regionCollection = await getCollection("region");
+const pageHierarchy = await getPageHierarchy();
 ---
 
 <div class="drawer lg:drawer-open drawer-auto-gutter">
@@ -51,7 +51,7 @@ const regionCollection = await getCollection("region");
         </li>
       </ul>
 
-      <ul id="nav" transition:persist class="flex-auto menu p-0">
+      <ul id="nav" transition:persist class="flex-auto menu menu-sm p-0">
         <li>
           <details>
             <summary class="flex"><Earth /> Мир </summary>
@@ -63,15 +63,33 @@ const regionCollection = await getCollection("region");
                   <summary>Регионы</summary>
                   <ul>
                     {
-                      regionCollection
-                        .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
-                        .map((region) => (
-                          <li>
-                            <a href={`/world/regions/${region.slug}`}>
-                              {region.data.title}
-                            </a>
-                          </li>
-                        ))
+                      pageHierarchy.regions.map((region) => (
+                        <li>
+                          {region.children && region.children.length ? (
+                            <details>
+                              <summary>{region.title}</summary>
+
+                              <ul>
+                                <li>
+                                  <a href={region.href}>Общее описание</a>
+                                </li>
+                                <li>
+                                  <details>
+                                    <summary>Города</summary>
+                                    {region.children?.map((city) => (
+                                      <li class="pl-6">
+                                        <a href={city.href}>{city.title}</a>
+                                      </li>
+                                    ))}
+                                  </details>
+                                </li>
+                              </ul>
+                            </details>
+                          ) : (
+                            <a href={region.href}>{region.title}</a>
+                          )}
+                        </li>
+                      ))
                     }
                   </ul>
                 </details>

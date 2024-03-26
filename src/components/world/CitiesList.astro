@@ -1,0 +1,35 @@
+---
+import CityLink from "./CityLink.astro";
+
+interface Props {
+  title: string;
+  region: {
+    slug: string;
+  };
+  cities: {
+    slug: string;
+    data: {
+      title: string;
+    };
+  }[];
+}
+
+const { region, cities } = Astro.props;
+---
+
+{
+  cities?.length > 0 && (
+    <>
+      <h3>
+        <span class="bold">Мелкие города:</span>
+      </h3>
+      <ul>
+        {cities.map((city) => (
+          <li>
+            <CityLink region={region} city={city} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
