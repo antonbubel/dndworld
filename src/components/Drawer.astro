@@ -2,7 +2,7 @@
 import {
   Menu,
   Earth,
-  Map,
+  Github,
   UsersRound,
   PawPrint,
   LibraryBig,
@@ -100,6 +100,17 @@ const regionCollection = await getCollection("region");
 
       <div>
         <ThemeController />
+        <div class="divider"></div>
+        <div class="prose-sm flex gap-2">
+          <p>Found an issue?</p>
+          <a
+            class="underline flex gap-2"
+            href="https://github.com/antonbubel/dndworld"
+            target="_blank"
+            >Edit on GitHub
+            <Github size={20} /></a
+          >
+        </div>
       </div>
     </div>
   </div>
