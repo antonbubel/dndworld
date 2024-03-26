@@ -1,5 +1,4 @@
 import { z, defineCollection } from "astro:content";
-import { citySizes } from "src/cities";
 
 const regionCollection = defineCollection({
   type: "content",
@@ -15,7 +14,7 @@ const cityCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    size: z.enum(citySizes),
+    size: z.enum(["capital", "big", "medium", "small"]),
     sortOrder: z.number(),
     region: z.string(),
     image: z.string().optional(),
