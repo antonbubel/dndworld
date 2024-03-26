@@ -1,0 +1,37 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  image?: string | undefined;
+  imageAlt?: string | undefined;
+  description?: string | undefined;
+}
+
+const { title, image, imageAlt, description } = Astro.props;
+
+const metadataTitle = `${title} | D&D Wiki`;
+---
+
+<BaseLayout title={metadataTitle} {description}>
+  <div class="prose">
+    <div class="flex flex-col lg:flex-col-reverse">
+      <div class="flex gap-4 pr-16 sm:pr-0 pb-4 lg:pb-0">
+        <slot name="before-title" />
+        <h1>{title}</h1>
+      </div>
+      {
+        image && (
+          <img
+            src={image}
+            alt={imageAlt || title}
+            class="rounded mt-0 w-full max-h-96 object-cover pb-0 lg:pb-6"
+          />
+        )
+      }
+    </div>
+    <slot />
+  </div>
+
+  <slot name="after-prose" />
+</BaseLayout>

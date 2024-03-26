@@ -1,16 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import TextPageLayout from "../../layouts/BaseLayout.astro";
 import { PawPrint } from "lucide-astro";
 
-const title = `Бестиарий | D&D Wiki`;
+const title = `Бестиарий`;
 const description = `Добро пожаловать в Реневон!`;
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <PawPrint size={40} />
-      <h1>Бестиарий</h1>
-    </div>
-  </div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <PawPrint slot="before-title" size={40} />
+</TextPageLayout>

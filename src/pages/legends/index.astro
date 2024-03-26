@@ -1,16 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { LibraryBig } from "lucide-astro";
 
-const title = `Легенды | D&D Wiki`;
+const title = `Легенды`;
 const description = `Добро пожаловать в Реневон!`;
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <LibraryBig size={40} />
-      <h1>Легенды</h1>
-    </div>
-  </div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <LibraryBig slot="before-title" size={40} />
+</TextPageLayout>

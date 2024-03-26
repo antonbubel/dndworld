@@ -1,22 +1,17 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { Map as MapIcon } from "lucide-astro";
 
-const title = `Карта мира | D&D Wiki`;
+const title = `Карта мира`;
 const description = `Карта Реневона`;
 
 import "ol/ol.css";
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <MapIcon size={40} />
-      <h1>Карта мира</h1>
-    </div>
-  </div>
-  <div id="map" class="map h-[40rem] lg:h-[48rem]"></div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <MapIcon slot="before-title" size={40} />
+  <div id="map" slot="after-prose" class="map h-[40rem] lg:h-[48rem]"></div>
+</TextPageLayout>
 
 <script>
   import Map from "ol/Map";

@@ -1,16 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
 import { UsersRound } from "lucide-astro";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
 
-const title = `Бестиарий | D&D Wiki`;
+const title = `Население`;
 const description = `Добро пожаловать в Реневон!`;
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <UsersRound size={40} />
-      <h1>Население</h1>
-    </div>
-  </div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <UsersRound slot="before-title" size={40} />
+</TextPageLayout>

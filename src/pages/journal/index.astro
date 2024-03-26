@@ -1,16 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { NotebookText } from "lucide-astro";
 
 const title = `Журнал | D&D Wiki`;
 const description = `Истории предыдущих приключений.`;
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <NotebookText size={40} />
-      <h1 class="italic">Журнал</h1>
-    </div>
-  </div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <NotebookText slot="before-title" size={40} />
+</TextPageLayout>

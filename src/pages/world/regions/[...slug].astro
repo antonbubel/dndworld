@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../../layouts/Layout.astro";
+import TextPageLayout from "../../../layouts/TextPageLayout.astro";
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -16,11 +16,10 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Layout title={entry.data.title} description={entry.data.description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <h1>{entry.data.title}</h1>
-    </div>
-    <Content />
-  </div>
-</Layout>
+<TextPageLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  image={entry.data.image}
+>
+  <Content />
+</TextPageLayout>

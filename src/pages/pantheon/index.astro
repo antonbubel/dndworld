@@ -1,16 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { Zap } from "lucide-astro";
 
-const title = `Божества | D&D Wiki`;
+const title = `Божества`;
 const description = `Добро пожаловать в Реневон!`;
 ---
 
-<Layout {title} {description}>
-  <div class="prose">
-    <div class="flex gap-4">
-      <Zap size={40} />
-      <h1>Божества</h1>
-    </div>
-  </div>
-</Layout>
+<TextPageLayout {title} {description}>
+  <Zap slot="before-title" size={40} />
+</TextPageLayout>
