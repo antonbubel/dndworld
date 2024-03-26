@@ -58,7 +58,8 @@ const pageHierarchy = await getPageHierarchy();
             <ul>
               <li>
                 <a aria-label="Общая информация о мире" href="/world"
-                  >Общая информация</a>
+                  >Общая информация</a
+                >
               </li>
               <li><a href="/world/map">Карта мира </a></li>
               <li>
@@ -68,7 +69,8 @@ const pageHierarchy = await getPageHierarchy();
                     {
                       pageHierarchy.regions.map((region) => (
                         <li>
-                          {region.children && region.children.length ? (
+                          {region.cities.length > 0 ||
+                          region.tribes.length > 0 ? (
                             <details>
                               <summary>{region.title}</summary>
 
@@ -81,21 +83,40 @@ const pageHierarchy = await getPageHierarchy();
                                     Описание региона
                                   </a>
                                 </li>
-                                <li>
-                                  <details>
-                                    <summary>Города</summary>
-                                    {region.children?.map((city) => (
-                                      <li class="pl-6">
-                                        <a
-                                          aria-label={`${region.title} - ${city.title}`}
-                                          href={city.href}
-                                        >
-                                          {city.title}
-                                        </a>
-                                      </li>
-                                    ))}
-                                  </details>
-                                </li>
+                                {region.cities.length > 0 && (
+                                  <li>
+                                    <details>
+                                      <summary>Города</summary>
+                                      {region.cities?.map((city) => (
+                                        <li class="pl-6">
+                                          <a
+                                            aria-label={`${region.title} - ${city.title}`}
+                                            href={city.href}
+                                          >
+                                            {city.title}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </details>
+                                  </li>
+                                )}
+                                {region.tribes.length > 0 && (
+                                  <li>
+                                    <details>
+                                      <summary>Племена</summary>
+                                      {region.tribes?.map((tribe) => (
+                                        <li class="pl-6">
+                                          <a
+                                            aria-label={`${region.title} - ${tribe.title}`}
+                                            href={tribe.href}
+                                          >
+                                            {tribe.title}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </details>
+                                  </li>
+                                )}
                               </ul>
                             </details>
                           ) : (

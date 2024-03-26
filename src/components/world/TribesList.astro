@@ -1,12 +1,12 @@
 ---
-import CityLink from "./CityLink.astro";
+import TribeLink from "./TribeLink.astro";
 
 interface Props {
   title: string;
   region: {
     slug: string;
   };
-  cities: {
+  tribes: {
     slug: string;
     data: {
       title: string;
@@ -15,19 +15,19 @@ interface Props {
   }[];
 }
 
-const { title, region, cities } = Astro.props;
+const { title, region, tribes } = Astro.props;
 ---
 
 {
-  cities?.length > 0 && (
+  tribes?.length > 0 && (
     <>
       <h3>
         <span class="bold">{title}:</span>
       </h3>
       <ul>
-        {cities.map((city) => (
+        {tribes.map((tribe) => (
           <li>
-            <CityLink region={region} city={city} />
+            <TribeLink region={region} tribe={tribe} />
           </li>
         ))}
       </ul>

@@ -3,28 +3,34 @@ import { getCollection } from "astro:content";
 import TextPageLayout from "@layouts/TextPageLayout.astro";
 import CitiesList from "@components/world/CitiesList.astro";
 import CityLink from "@components/world/CityLink.astro";
+import TribesList from "@components/world/TribesList.astro";
 
 export const prerender = true;
 export async function getStaticPaths() {
   const regionsCollection = await getCollection("regions");
   const citiesCollection = await getCollection("cities");
+  const tribesCollection = await getCollection("tribes");
 
   return regionsCollection.map((region) => {
     const cities = citiesCollection
       .filter((city) => city.data.region === region.slug)
       .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 
+    const tribes = tribesCollection
+      .filter((tribe) => tribe.data.region === region.slug)
+      .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
     return {
       params: { region: region.slug },
-      props: { region, cities },
+      props: { region, cities, tribes },
     };
   });
 }
 
-const { region, cities } = Astro.props;
+const { region, cities, tribes } = Astro.props;
 const { Content } = await region.render();
 
-const capital = cities.find((city) => city.data.size === "capital");
+const capitals = cities.filter((city) => city.data.size === "capital");
 const bigCities = cities.filter((city) => city.data.size === "big");
 const mediumCities = cities.filter((city) => city.data.size === "medium");
 const smallCities = cities.filter((city) => city.data.size === "small");
@@ -36,19 +42,11 @@ const smallCities = cities.filter((city) => city.data.size === "small");
   image={region.data.image}
 >
   <div>
-    {
-      capital && (
-        <>
-          <h3>
-            <span class="bold">Столица:</span>
-          </h3>
-          <CityLink region={region} city={capital} />
-        </>
-      )
-    }
+    <CitiesList title="Столица" region={region} cities={capitals} />
     <CitiesList title="Большие города" region={region} cities={bigCities} />
     <CitiesList title="Средние города" region={region} cities={mediumCities} />
     <CitiesList title="Мелкие города" region={region} cities={smallCities} />
+    <TribesList title="Племена" region={region} tribes={tribes} />
   </div>
 
   <div class="divider"></div>

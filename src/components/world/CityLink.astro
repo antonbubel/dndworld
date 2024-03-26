@@ -4,6 +4,7 @@ interface Props {
     slug: string;
     data: {
       title: string;
+      holders?: string | undefined;
     };
   };
   region: {
@@ -17,7 +18,7 @@ const { city, region } = Astro.props;
 {
   city && region && (
     <a href={`/world/regions/${region.slug}/cities/${city.slug}`}>
-      {city.data.title}
+      {city.data.title}{" "}{city.data.holders && `(${city.data.holders})`}
     </a>
   )
 }

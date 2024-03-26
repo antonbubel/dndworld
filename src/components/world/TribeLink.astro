@@ -1,0 +1,23 @@
+---
+interface Props {
+  tribe: {
+    slug: string;
+    data: {
+      title: string;
+    };
+  };
+  region: {
+    slug: string;
+  };
+}
+
+const { tribe, region } = Astro.props;
+---
+
+{
+  tribe && region && (
+    <a href={`/world/regions/${region.slug}/tribes/${tribe.slug}`}>
+      {tribe.data.title}
+    </a>
+  )
+}

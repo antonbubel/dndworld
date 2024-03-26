@@ -1,6 +1,6 @@
 import { z, defineCollection } from "astro:content";
 
-const regionCollection = defineCollection({
+const regionsCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
@@ -10,11 +10,22 @@ const regionCollection = defineCollection({
   }),
 });
 
-const cityCollection = defineCollection({
+const citiesCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
     size: z.enum(["capital", "big", "medium", "small"]),
+    holders: z.string().optional(),
+    sortOrder: z.number(),
+    region: z.string(),
+    image: z.string().optional(),
+  }),
+});
+
+const tribesCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
     sortOrder: z.number(),
     region: z.string(),
     image: z.string().optional(),
@@ -22,6 +33,7 @@ const cityCollection = defineCollection({
 });
 
 export const collections = {
-  regions: regionCollection,
-  cities: cityCollection,
+  regions: regionsCollection,
+  cities: citiesCollection,
+  tribes: tribesCollection,
 };

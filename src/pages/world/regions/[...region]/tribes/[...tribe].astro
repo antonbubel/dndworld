@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import RegionLink from "@components/world/RegionLink.astro";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const regionsCollection = await getCollection("regions");
+  const tribesCollection = await getCollection("tribes");
+
+  return tribesCollection.map((tribe) => {
+    const region = regionsCollection.find(
+      (region) => tribe.data.region === region.slug
+    );
+
+    if (!region) {
+      return {
+        params: {
+          tribe: tribe.slug,
+        },
+      };
+    }
+
+    return {
+      params: {
+        region: region.slug,
+        tribe: tribe.slug,
+      },
+      props: { tribe, region },
+    };
+  });
+}
+
+const { tribe, region } = Astro.props;
+const { Content } = await tribe.render();
+
+const description = `${tribe.data.title} - племя в регионе ${region.data.title}.`;
+---
+
+<TextPageLayout title={tribe.data.title} {description} image={tribe.data.image}>
+  {
+    region && (
+      <>
+        <h3>Регион:</h3>
+        <RegionLink region={region} />
+      </>
+    )
+  }
+  <div class="divider"></div>
+  <Content />
+</TextPageLayout>

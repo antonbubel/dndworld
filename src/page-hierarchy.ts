@@ -1,29 +1,42 @@
 import { getCollection } from "astro:content";
 
 interface Root {
-  regions: Page[];
+  regions: Region[];
 }
 
 interface Page {
   title: string;
   href: string;
-  children?: Page[];
 }
 
-async function getRegions(): Promise<Page[]> {
+interface Region extends Page {
+  cities: Page[];
+  tribes: Page[];
+}
+
+async function getRegions(): Promise<Region[]> {
   const regionsCollection = await getCollection("regions");
   const citiesCollection = await getCollection("cities");
+  const tribesCollection = await getCollection("tribes");
 
   return regionsCollection
     .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
     .map((region) => ({
       title: region.data.title,
       href: `/world/regions/${region.slug}`,
-      children: citiesCollection.filter((city) => city.data.region === region.slug)
+      cities: citiesCollection
+        .filter((city) => city.data.region === region.slug)
         .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
         .map((city) => ({
           title: city.data.title,
           href: `/world/regions/${region.slug}/cities/${city.slug}`,
+        })),
+      tribes: tribesCollection
+        .filter((tribe) => tribe.data.region === region.slug)
+        .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+        .map((tribe) => ({
+          title: tribe.data.title,
+          href: `/world/regions/${region.slug}/tribes/${tribe.slug}`,
         })),
     }));
 }
