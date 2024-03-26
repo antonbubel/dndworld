@@ -56,7 +56,10 @@ const pageHierarchy = await getPageHierarchy();
           <details>
             <summary class="flex"><Earth /> Мир </summary>
             <ul>
-              <li><a href="/world">Общая информация</a></li>
+              <li>
+                <a aria-label="Общая информация о мире" href="/world"
+                  >Общая информация</a>
+              </li>
               <li><a href="/world/map">Карта мира </a></li>
               <li>
                 <details>
@@ -71,14 +74,24 @@ const pageHierarchy = await getPageHierarchy();
 
                               <ul>
                                 <li>
-                                  <a href={region.href}>Общее описание</a>
+                                  <a
+                                    aria-label={`${region.title} - Описание региона`}
+                                    href={region.href}
+                                  >
+                                    Описание региона
+                                  </a>
                                 </li>
                                 <li>
                                   <details>
                                     <summary>Города</summary>
                                     {region.children?.map((city) => (
                                       <li class="pl-6">
-                                        <a href={city.href}>{city.title}</a>
+                                        <a
+                                          aria-label={`${region.title} - ${city.title}`}
+                                          href={city.href}
+                                        >
+                                          {city.title}
+                                        </a>
                                       </li>
                                     ))}
                                   </details>

@@ -14,14 +14,14 @@ interface Props {
   }[];
 }
 
-const { region, cities } = Astro.props;
+const { title, region, cities } = Astro.props;
 ---
 
 {
   cities?.length > 0 && (
     <>
       <h3>
-        <span class="bold">Мелкие города:</span>
+        <span class="bold">{title}:</span>
       </h3>
       <ul>
         {cities.map((city) => (

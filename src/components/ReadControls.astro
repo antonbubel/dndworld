@@ -2,19 +2,19 @@
 import { ChevronLeft, ChevronRight } from "lucide-astro";
 ---
 
-<div class="w-full flex flex-col-reverse lg:flex-row justify-between gap-2">
-  <a id="prev-page" href="#" class="btn flex">
+<div class="w-full flex flex-col-reverse lg:flex-row justify-between gap-2 lg:gap-4 flex-wrap-reverse">
+  <a id="prev-page" href="#" class="btn h-full flex flex-nowrap py-4">
     <ChevronLeft size="20" />
     <div class="flex flex-col items-start">
       <span class="text-[0.6rem]">Предыдущая страница</span>
-      <span class="text-sm page-name">...</span>
+      <span class="text-sm page-name break-words text-left">...</span>
     </div>
   </a>
 
-  <a id="next-page" href="#" class="btn lg:ml-auto">
+  <a id="next-page" href="#" class="btn h-full lg:ml-auto flex flex-nowrap py-4">
     <div class="flex flex-col items-start">
       <span class="text-[0.6rem]">Следующая страница</span>
-      <span class="text-sm page-name">...</span>
+      <span class="text-sm page-name break-words text-left">...</span>
     </div>
     <ChevronRight size="20" />
   </a>
@@ -117,7 +117,7 @@ import { ChevronLeft, ChevronRight } from "lucide-astro";
 
       if (nextPage && nextPageText) {
         nextPage.setAttribute("href", navLink.href);
-        nextPageText.textContent = navLink.textContent;
+        nextPageText.textContent = navLink.getAttribute('aria-label') || navLink.textContent;
       }
     } else {
       toggleNextPageControl(false);
@@ -133,7 +133,7 @@ import { ChevronLeft, ChevronRight } from "lucide-astro";
 
       if (prevPage && prevPageText) {
         prevPage.setAttribute("href", navLink.href);
-        prevPageText.textContent = navLink.textContent;
+        prevPageText.textContent = navLink.getAttribute('aria-label') || navLink.textContent;
       }
     } else {
       togglePrevPageControl(false);
