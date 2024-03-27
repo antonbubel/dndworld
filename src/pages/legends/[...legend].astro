@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const legendsCollection = await getCollection("legends");
+
+  return legendsCollection.map((legend) => ({
+    params: { legend: legend.slug },
+    props: { legend },
+  }));
+}
+
+const { legend } = Astro.props;
+const { Content } = await legend.render();
+
+const description = `${legend.data.title} - Легенда Реневона.`;
+---
+
+<TextPageLayout title={legend.data.title} {description}>
+  <Content />
+</TextPageLayout>

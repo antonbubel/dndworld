@@ -32,8 +32,18 @@ const tribesCollection = defineCollection({
   }),
 });
 
+const legendsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
 export const collections = {
   regions: regionsCollection,
   cities: citiesCollection,
   tribes: tribesCollection,
+  legends: legendsCollection,
 };

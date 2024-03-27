@@ -1,0 +1,14 @@
+---
+interface Props {
+  legend: {
+    slug: string;
+    data: {
+      title: string;
+    };
+  };
+}
+
+const { legend } = Astro.props;
+---
+
+{legend && <a href={`/legends/${legend.slug}`}>{legend.data.title}</a>}

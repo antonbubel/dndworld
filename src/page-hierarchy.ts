@@ -2,6 +2,7 @@ import { getCollection } from "astro:content";
 
 interface Root {
   regions: Region[];
+  legends: Page[];
 }
 
 interface Page {
@@ -41,10 +42,23 @@ async function getRegions(): Promise<Region[]> {
     }));
 }
 
+async function getLegends(): Promise<Page[]> {
+  const legendsCollection = await getCollection("legends");
+
+  return legendsCollection
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map((legend) => ({
+      title: legend.data.title,
+      href: `/legends/${legend.slug}`,
+    }));
+}
+
 export async function getPageHierarchy(): Promise<Root> {
   const regions = await getRegions();
+  const legends = await getLegends();
 
   return {
     regions,
+    legends,
   };
 }

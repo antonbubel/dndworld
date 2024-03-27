@@ -87,16 +87,18 @@ const pageHierarchy = await getPageHierarchy();
                                   <li>
                                     <details>
                                       <summary>Города</summary>
-                                      {region.cities?.map((city) => (
-                                        <li class="pl-6">
-                                          <a
-                                            aria-label={`${region.title} - ${city.title}`}
-                                            href={city.href}
-                                          >
-                                            {city.title}
-                                          </a>
-                                        </li>
-                                      ))}
+                                      <ul>
+                                        {region.cities?.map((city) => (
+                                          <li>
+                                            <a
+                                              aria-label={`${region.title} - ${city.title}`}
+                                              href={city.href}
+                                            >
+                                              {city.title}
+                                            </a>
+                                          </li>
+                                        ))}
+                                      </ul>
                                     </details>
                                   </li>
                                 )}
@@ -104,16 +106,18 @@ const pageHierarchy = await getPageHierarchy();
                                   <li>
                                     <details>
                                       <summary>Племена</summary>
-                                      {region.tribes?.map((tribe) => (
-                                        <li class="pl-6">
-                                          <a
-                                            aria-label={`${region.title} - ${tribe.title}`}
-                                            href={tribe.href}
-                                          >
-                                            {tribe.title}
-                                          </a>
-                                        </li>
-                                      ))}
+                                      <ul>
+                                        {region.tribes?.map((tribe) => (
+                                          <li>
+                                            <a
+                                              aria-label={`${region.title} - ${tribe.title}`}
+                                              href={tribe.href}
+                                            >
+                                              {tribe.title}
+                                            </a>
+                                          </li>
+                                        ))}
+                                      </ul>
                                     </details>
                                   </li>
                                 )}
@@ -140,81 +144,102 @@ const pageHierarchy = await getPageHierarchy();
             <a href="/bestiary"><PawPrint /> Бестиарий </a>
           </li>
           <li>
-            <a href="/legends"><LibraryBig /> Легенды </a>
-          </li>
-          <li>
-            <a href="/journal"
-              ><NotebookText /> <span class="italic">Журнал</span>
-            </a>
+            <details>
+              <summary><LibraryBig /> Легенды</summary>
+              <ul>
+                <li>
+                  <a href="/legends">Хронология</a>
+                </li>
+                <li>
+                  <details>
+                    <summary>Легенды мира</summary>
+                    <ul>
+                      {
+                        pageHierarchy.legends.map((legend) => (
+                          <li>
+                            <a href={legend.href}>{legend.title}</a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+            <li>
+              <a href="/journal"
+                ><NotebookText /> <span class="italic">Журнал</span>
+              </a>
+            </li>
           </li>
         </li>
-      </ul>
 
-      <div>
-        <ThemeController />
-        <div class="divider"></div>
-        <div class="prose-sm flex gap-2">
-          <p>Found an issue?</p>
-          <a
-            class="underline flex gap-2"
-            href="https://github.com/antonbubel/dndworld"
-            target="_blank"
-            >Edit on GitHub
-            <Github size={20} /></a
-          >
+        <div>
+          <ThemeController />
+          <div class="divider"></div>
+          <div class="prose-sm flex gap-2">
+            <p>Found an issue?</p>
+            <a
+              class="underline flex gap-2"
+              href="https://github.com/antonbubel/dndworld"
+              target="_blank"
+              >Edit on GitHub
+              <Github size={20} /></a
+            >
+          </div>
         </div>
-      </div>
+      </ul>
     </div>
   </div>
-</div>
 
-<script>
-  function openActiveTree() {
-    const activeLink = document.querySelector("#nav a.active");
-    const navElement = document.querySelector("#nav");
+  <script>
+    function openActiveTree() {
+      const activeLink = document.querySelector("#nav a.active");
+      const navElement = document.querySelector("#nav");
 
-    if (activeLink) {
-      openClosedDetails(activeLink, navElement);
-    }
-  }
-
-  function openClosedDetails(
-    childElement: Element,
-    stopElement: Element | null = null
-  ) {
-    const parentElement = childElement.parentElement;
-
-    if (parentElement && parentElement !== stopElement) {
-      if (parentElement.tagName === "DETAILS") {
-        const detailsElement = parentElement as HTMLDetailsElement;
-        detailsElement.open = true;
+      if (activeLink) {
+        openClosedDetails(activeLink, navElement);
       }
-
-      openClosedDetails(parentElement);
     }
-  }
 
-  function setActiveLink() {
-    const navLinks = document.querySelectorAll("#nav a");
+    function openClosedDetails(
+      childElement: Element,
+      stopElement: Element | null = null
+    ) {
+      const parentElement = childElement.parentElement;
 
-    navLinks.forEach((link) => {
-      const linkElement = link as HTMLAnchorElement;
+      if (parentElement && parentElement !== stopElement) {
+        if (parentElement.tagName === "DETAILS") {
+          const detailsElement = parentElement as HTMLDetailsElement;
+          detailsElement.open = true;
+        }
 
-      linkElement.classList.remove("active");
-
-      if (window.location.pathname === linkElement.pathname) {
-        link.classList.add("active");
+        openClosedDetails(parentElement);
       }
-    });
+    }
 
-    document.dispatchEvent(new Event("nav:active-link-set"));
-  }
+    function setActiveLink() {
+      const navLinks = document.querySelectorAll("#nav a");
 
-  setActiveLink();
-  openActiveTree();
+      navLinks.forEach((link) => {
+        const linkElement = link as HTMLAnchorElement;
 
-  document.addEventListener("astro:after-swap", () => {
+        linkElement.classList.remove("active");
+
+        if (window.location.pathname === linkElement.pathname) {
+          link.classList.add("active");
+        }
+      });
+
+      document.dispatchEvent(new Event("nav:active-link-set"));
+    }
+
     setActiveLink();
     openActiveTree();
-  });
-</script>
+
+    document.addEventListener("astro:after-swap", () => {
+      setActiveLink();
+      openActiveTree();
+    });
+  </script>
+</div>

@@ -1,11 +1,30 @@
 ---
+import { getCollection } from "astro:content";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { LibraryBig } from "lucide-astro";
+import LegendLink from "@components/legends/LegendLink.astro";
 
 const title = `Легенды`;
-const description = `Добро пожаловать в Реневон!`;
+const description = `Все истории передаваемые из уст в уста разной степени достроверности.`;
+
+const legendsCollection = (await getCollection("legends")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder
+);
 ---
 
 <TextPageLayout {title} {description}>
   <LibraryBig slot="before-title" size={40} />
+  <blockquote>
+    Все истории передаваемые из уст в уста разной степени достроверности
+  </blockquote>
+  <h2>Хронология:</h2>
+  <ol>
+    {
+      legendsCollection.map((legend) => (
+        <li>
+          <LegendLink legend={legend} />
+        </li>
+      ))
+    }
+  </ol>
 </TextPageLayout>
