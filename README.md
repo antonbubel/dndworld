@@ -1,32 +1,24 @@
-# Astro Starter Kit: Basics
+# dndworld
 
-```sh
-npm create astro@latest -- --template basics
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+This project is a custom Wiki for our D&D game built with [Astro](https://astro.build/).
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside of the project, you'll see the following folders and files:
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
+│   └── ... this is a folder for assets
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
+│   │   └── ... this is a folder for all ![Astro Components](https://docs.astro.build/en/basics/astro-components/)
+│   ├── content/
+│   │   └── ... this is a folder holds ![Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
 │   ├── layouts/
-│   │   └── Layout.astro
+│   │   └── ... this folder holds ![Astro Layouts](https://docs.astro.build/en/basics/layouts/) for the app
 │   └── pages/
-│       └── index.astro
+│       └── ... this folder holds ![Astro Pages](https://docs.astro.build/en/basics/astro-pages/)
 └── package.json
 ```
 
@@ -49,6 +41,14 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 🗺️ Maps implementation
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Maps are implemented using the [openlayers](https://openlayers.org/) library.
+
+To generate the tiles for the openlayers from the map image I used [gdal2tiles.py](https://gdal.org/programs/gdal2tiles.html) gdal python binding.
+For Windows you can install [gdal](https://gdal.org/index.html) and gdal python bindings using [osgeo4w](https://www.osgeo.org/projects/osgeo4w/).
+
+To generate the tiles from an image you must run the following command:
+```sh
+C:\OSGeo4W\apps\Python39\Scripts>python gdal2tiles.py -p raster -s EPSG:4326 map.jpg output_directory
+```
