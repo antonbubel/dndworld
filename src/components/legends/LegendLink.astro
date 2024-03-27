@@ -1,11 +1,8 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  legend: {
-    slug: string;
-    data: {
-      title: string;
-    };
-  };
+  legend: CollectionEntry<"legends">;
 }
 
 const { legend } = Astro.props;

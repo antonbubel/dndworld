@@ -1,18 +1,11 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import CityLink from "./CityLink.astro";
 
 interface Props {
   title: string;
-  region: {
-    slug: string;
-  };
-  cities: {
-    slug: string;
-    data: {
-      title: string;
-      holders?: string | undefined;
-    };
-  }[];
+  region: CollectionEntry<"regions">;
+  cities: CollectionEntry<"cities">[];
 }
 
 const { title, region, cities } = Astro.props;

@@ -1,15 +1,9 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  city: {
-    slug: string;
-    data: {
-      title: string;
-      holders?: string | undefined;
-    };
-  };
-  region: {
-    slug: string;
-  };
+  city: CollectionEntry<"cities">;
+  region: CollectionEntry<"regions">;
 }
 
 const { city, region } = Astro.props;
@@ -18,7 +12,7 @@ const { city, region } = Astro.props;
 {
   city && region && (
     <a href={`/world/regions/${region.slug}/cities/${city.slug}`}>
-      {city.data.title}{" "}{city.data.holders && `(${city.data.holders})`}
+      {city.data.title} {city.data.holders && `(${city.data.holders})`}
     </a>
   )
 }

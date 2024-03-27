@@ -1,14 +1,9 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  tribe: {
-    slug: string;
-    data: {
-      title: string;
-    };
-  };
-  region: {
-    slug: string;
-  };
+  tribe: CollectionEntry<"tribes">;
+  region: CollectionEntry<"regions">;
 }
 
 const { tribe, region } = Astro.props;

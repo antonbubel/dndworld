@@ -1,18 +1,11 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import TribeLink from "./TribeLink.astro";
 
 interface Props {
   title: string;
-  region: {
-    slug: string;
-  };
-  tribes: {
-    slug: string;
-    data: {
-      title: string;
-      holders?: string | undefined;
-    };
-  }[];
+  region: CollectionEntry<"regions">;
+  tribes: CollectionEntry<"tribes">[];
 }
 
 const { title, region, tribes } = Astro.props;

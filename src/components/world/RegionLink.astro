@@ -1,11 +1,8 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  region: {
-    slug: string;
-    data: {
-      title: string;
-    };
-  };
+  region: CollectionEntry<"regions">;
 }
 
 const { region } = Astro.props;
