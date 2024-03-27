@@ -20,6 +20,7 @@ const pageHierarchy = await getPageHierarchy();
 <style>
   #nav li {
     word-break: break-word;
+    overflow-wrap: break-word;
   }
 </style>
 
@@ -44,7 +45,7 @@ const pageHierarchy = await getPageHierarchy();
 
     <!-- Sidebar content here -->
     <div
-      class="px-4 py-6 w-80 min-h-full bg-base-200 text-base-content flex flex-col gap-4"
+      class="px-4 py-6 w-screen lg:w-80 min-h-full bg-base-200 text-base-content flex flex-col gap-4"
     >
       <ul class="menu p-0">
         <li>
@@ -57,7 +58,11 @@ const pageHierarchy = await getPageHierarchy();
         </li>
       </ul>
 
-      <ul id="nav" transition:persist class="flex-auto menu menu-sm p-0">
+      <ul
+        id="nav"
+        transition:persist
+        class="flex-auto menu menu-sm p-0 relative"
+      >
         <li>
           <details>
             <summary class="flex"><Earth /> Мир </summary>
@@ -140,61 +145,63 @@ const pageHierarchy = await getPageHierarchy();
               </li>
             </ul>
           </details>
+        </li>
+        <li>
+          <a href="/pantheon"><Zap /> Божества </a>
+        </li>
+        <li>
+          <a href="/population"><UsersRound /> Население </a>
+        </li>
+        <li>
+          <a href="/bestiary"><PawPrint /> Бестиарий </a>
+        </li>
+        <li>
+          <details>
+            <summary><LibraryBig /> Легенды</summary>
+            <ul>
+              <li>
+                <a href="/legends">Хронология</a>
+              </li>
+              <li>
+                <details>
+                  <summary>Легенды мира</summary>
+                  <ul>
+                    {
+                      pageHierarchy.legends.map((legend) => (
+                        <li>
+                          <a href={legend.href}>
+                            {legend.title}
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </details>
+              </li>
+            </ul>
+          </details>
           <li>
-            <a href="/pantheon"><Zap /> Божества </a>
-          </li>
-          <li>
-            <a href="/population"><UsersRound /> Население </a>
-          </li>
-          <li>
-            <a href="/bestiary"><PawPrint /> Бестиарий </a>
-          </li>
-          <li>
-            <details>
-              <summary><LibraryBig /> Легенды</summary>
-              <ul>
-                <li>
-                  <a href="/legends">Хронология</a>
-                </li>
-                <li>
-                  <details>
-                    <summary>Легенды мира</summary>
-                    <ul>
-                      {
-                        pageHierarchy.legends.map((legend) => (
-                          <li>
-                            <a href={legend.href}>{legend.title}</a>
-                          </li>
-                        ))
-                      }
-                    </ul>
-                  </details>
-                </li>
-              </ul>
-            </details>
-            <li>
-              <a href="/journal"
-                ><NotebookText /> <span class="italic">Журнал</span>
-              </a>
-            </li>
+            <a href="/journal"
+              ><NotebookText /> <span class="italic">Журнал</span>
+            </a>
           </li>
         </li>
-
-        <div>
-          <ThemeController />
-          <div class="divider"></div>
-          <div class="prose-sm flex gap-2">
-            <p>Found an issue?</p>
-            <a
-              class="underline flex gap-2"
-              href="https://github.com/antonbubel/dndworld"
-              target="_blank"
-              >Edit on GitHub
-              <Github size={20} /></a
-            >
-          </div>
-        </div>
       </ul>
+
+      <div class="mt-4">
+        <ThemeController />
+        <div class="divider"></div>
+        <div class="prose-sm flex gap-2">
+          <p>Found an issue?</p>
+          <a
+            class="underline flex gap-2"
+            href="https://github.com/antonbubel/dndworld"
+            target="_blank"
+            >Edit on GitHub
+            <Github size={20} /></a
+          >
+        </div>
+      </div>
     </div>
   </div>
 
