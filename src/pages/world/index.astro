@@ -1,9 +1,15 @@
 ---
+import { getCollection } from "astro:content";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { Earth } from "lucide-astro";
+import RegionLink from "@components/world/RegionLink.astro";
 
 const title = `Мир`;
 const description = `Добро пожаловать в Реневон!`;
+
+const regionsCollection = (await getCollection("regions")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder
+);
 ---
 
 <TextPageLayout {title} {description}>
@@ -37,4 +43,31 @@ const description = `Добро пожаловать в Реневон!`;
     свет — обещание приключений. Где магия — это дыхание мира, а мечты — его сердцебиение.
     Вперёд, к легендам, ждущим того, кто смело встретит их взгляд.
   </p>
+  <h2>География</h2>
+  <p>
+    Реневон — континент, окутанный тайнами и магией, где великие герои и тёмные
+    силы сплетают истории величия и падения. От воинственного Ясного побережья
+    до таинственных Нефритовых Земель, каждый уголок скрывает свои легенды.
+    Здесь древние леса и морозные гавани служат домом для эльфов, людей, и
+    многих других рас. В этом мире, где политические интриги и божественные
+    заговоры переплетаются с судьбами отважных ищущих приключений, каждый шаг
+    может привести к новому открытию или смертельной опасности.
+  </p>
+  <h2>Регионы:</h2>
+  <blockquote>
+    В каждом регионе естьнесколько больших городов со своими правителями, однако
+    политическое устройство каждого региона отличается.
+  </blockquote>
+  {
+    regionsCollection.map((region, index) => (
+      <>
+        <h3>
+          {index + 1}
+          {". "}
+          <RegionLink region={region} />
+        </h3>
+        <p>{region.data.description}</p>
+      </>
+    ))
+  }
 </TextPageLayout>
