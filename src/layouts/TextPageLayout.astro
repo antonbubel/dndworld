@@ -35,11 +35,10 @@ const metadataTitle = `${title} | D&D Wiki`;
       }
     </div>
     <slot />
+    <div class="mt-8 lg:mt-10">
+      <ReadControls />
+    </div>
   </div>
 
   <slot name="after-prose" />
-
-  <div class="mt-8 lg:mt-10 prose prose-a:no-underline">
-    <ReadControls />
-  </div>
 </BaseLayout>
