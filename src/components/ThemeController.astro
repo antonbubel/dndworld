@@ -17,11 +17,7 @@ import { themes, darkTheme, lightTheme, systemTheme } from "../themes";
   </select>
 </div>
 
-<script
-  is:inline
-  data-astro-rerun
-  define:vars={{ darkTheme, lightTheme, systemTheme }}
->
+<script define:vars={{ darkTheme, lightTheme, systemTheme }}>
   function getTheme(theme) {
     if (!theme || theme === systemTheme) {
       const isDarkMode = window.matchMedia(
@@ -60,4 +56,9 @@ import { themes, darkTheme, lightTheme, systemTheme } from "../themes";
 
   setStoredTheme();
   listenForThemeChange();
+
+  document.addEventListener("astro:after-swap", () => {
+    setStoredTheme();
+    listenForThemeChange();
+  });
 </script>
