@@ -17,6 +17,12 @@ import { getPageHierarchy } from "../page-hierarchy";
 const pageHierarchy = await getPageHierarchy();
 ---
 
+<style>
+  #nav li {
+    word-break: break-word;
+  }
+</style>
+
 <div class="drawer lg:drawer-open drawer-auto-gutter">
   <input id="drawer" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content">
