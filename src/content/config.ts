@@ -32,6 +32,18 @@ const tribesCollection = defineCollection({
   }),
 });
 
+const pantheonCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    nature: z.enum(["good", "neutral", "evil"]),
+    domain: z.string(),
+    symbol: z.string(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
 const legendsCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -45,5 +57,6 @@ export const collections = {
   regions: regionsCollection,
   cities: citiesCollection,
   tribes: tribesCollection,
+  pantheon: pantheonCollection,
   legends: legendsCollection,
 };
