@@ -12,7 +12,8 @@ import {
 
 import Swords from "./icons/Swords.astro";
 import ThemeController from "./ThemeController.astro";
-import { getPageHierarchy } from "../page-hierarchy";
+import { getPageHierarchy } from "../utils/page-hierarchy";
+import PagesMenu from "./PagesMenu.astro";
 
 const pageHierarchy = await getPageHierarchy();
 ---
@@ -96,40 +97,24 @@ const pageHierarchy = await getPageHierarchy();
                                 </li>
                                 {region.cities.length > 0 && (
                                   <li>
-                                    <details>
-                                      <summary>Города</summary>
-                                      <ul>
-                                        {region.cities?.map((city) => (
-                                          <li>
-                                            <a
-                                              aria-label={`${region.title} - ${city.title}`}
-                                              href={city.href}
-                                            >
-                                              {city.title}
-                                            </a>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </details>
+                                    <PagesMenu
+                                      title="Города"
+                                      ariaLabel={(title) =>
+                                        `${region.title} - ${title}`
+                                      }
+                                      pages={region.cities}
+                                    />
                                   </li>
                                 )}
                                 {region.tribes.length > 0 && (
                                   <li>
-                                    <details>
-                                      <summary>Племена</summary>
-                                      <ul>
-                                        {region.tribes?.map((tribe) => (
-                                          <li>
-                                            <a
-                                              aria-label={`${region.title} - ${tribe.title}`}
-                                              href={tribe.href}
-                                            >
-                                              {tribe.title}
-                                            </a>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </details>
+                                    <PagesMenu
+                                      title="Племена"
+                                      ariaLabel={(title) =>
+                                        `${region.title} - ${title}`
+                                      }
+                                      pages={region.tribes}
+                                    />
                                   </li>
                                 )}
                               </ul>
@@ -147,7 +132,41 @@ const pageHierarchy = await getPageHierarchy();
           </details>
         </li>
         <li>
-          <a href="/pantheon"><Zap /> Божества </a>
+          <details>
+            <summary><Zap /> Божества</summary>
+            <ul>
+              <li>
+                <a aria-label="Общая информация о божествах" href="/pantheon">
+                  Общая информация
+                </a>
+              </li>
+              <li>
+                <PagesMenu
+                  title="Доброе Мировозрение"
+                  pages={pageHierarchy.pantheon.good}
+                />
+              </li>
+              <li>
+                <PagesMenu
+                  title="Нейтральное Мировозрение"
+                  pages={pageHierarchy.pantheon.neutral}
+                />
+              </li>
+              <li>
+                <PagesMenu
+                  title="Злое Мировозрение"
+                  pages={pageHierarchy.pantheon.evil}
+                />
+              </li>
+
+              <li>
+                <PagesMenu
+                  title="Утратили Божественность"
+                  pages={pageHierarchy.pantheon.lostPower}
+                />
+              </li>
+            </ul>
+          </details>
         </li>
         <li>
           <a href="/population"><UsersRound /> Население </a>
@@ -163,26 +182,15 @@ const pageHierarchy = await getPageHierarchy();
                 <a href="/legends">Хронология</a>
               </li>
               <li>
-                <details>
-                  <summary>Легенды мира</summary>
-                  <ul>
-                    {
-                      pageHierarchy.legends.map((legend) => (
-                        <li>
-                          <a href={legend.href}>{legend.title}</a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </details>
+                <PagesMenu title="Легенды мира" pages={pageHierarchy.legends} />
               </li>
             </ul>
           </details>
-          <li>
-            <a href="/journal"
-              ><NotebookText /> <span class="italic">Журнал</span>
-            </a>
-          </li>
+        </li>
+        <li>
+          <a href="/journal"
+            ><NotebookText /> <span class="italic">Журнал</span>
+          </a>
         </li>
       </ul>
 

@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  deity: CollectionEntry<"pantheon">;
+}
+
+const { deity } = Astro.props;
+---
+
+{deity && <a href={`/pantheon/${deity.slug}`}>{deity.data.title}</a>}

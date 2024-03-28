@@ -1,4 +1,4 @@
-import { themes } from "./src/themes";
+import { themes } from "./src/utils/themes";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -46,6 +46,7 @@ export default {
       typography: {
         DEFAULT: {
           css: {
+            maxWidth: "65ch",
           },
         },
       },

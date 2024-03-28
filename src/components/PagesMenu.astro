@@ -1,0 +1,26 @@
+---
+import type { Page } from "src/utils/page-hierarchy";
+
+interface Props {
+  title: string;
+  ariaLabel?: (pageTitle: string) => string | undefined;
+  pages: Page[];
+}
+
+const { title, ariaLabel, pages } = Astro.props;
+---
+
+<details>
+  <summary>{title}</summary>
+  <ul>
+    {
+      pages?.map(({ title: pageTitle, href }) => (
+        <li>
+          <a aria-label={ariaLabel ? ariaLabel(pageTitle) : pageTitle} {href}>
+            {pageTitle}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>

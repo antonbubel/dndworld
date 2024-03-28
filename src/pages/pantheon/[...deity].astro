@@ -1,0 +1,42 @@
+---
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import { getCollection } from "astro:content";
+import { getNature } from "src/utils/pantheon";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const pantheonCollection = await getCollection("pantheon");
+
+  return pantheonCollection.map((deity) => ({
+    params: { deity: deity.slug },
+    props: { deity },
+  }));
+}
+
+const { deity } = Astro.props;
+const { Content } = await deity.render();
+---
+
+<TextPageLayout title={deity.data.title} image={deity.data.image}>
+  <p>
+    <span class="font-bold">Мировозрение</span>
+    <br />
+    {getNature(deity)}
+  </p>
+
+  <p>
+    <span class="font-bold">Домен</span>
+    <br />
+    {deity.data.domain}
+  </p>
+
+  <p>
+    <span class="font-bold">Символ</span>
+    <br />
+    {deity.data.symbol}
+  </p>
+
+  <div class="divider"></div>
+
+  <Content />
+</TextPageLayout>

@@ -1,21 +1,30 @@
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getPantheon } from "./pantheon";
 
-interface Root {
-  regions: Region[];
+export interface RootPage {
+  regions: RegionPage[];
+  pantheon: PantheonPages;
   legends: Page[];
 }
 
-interface Page {
+export interface Page {
   title: string;
   href: string;
 }
 
-interface Region extends Page {
+interface PantheonPages {
+  good: Page[];
+  neutral: Page[];
+  evil: Page[];
+  lostPower: Page[];
+}
+
+interface RegionPage extends Page {
   cities: Page[];
   tribes: Page[];
 }
 
-async function getRegions(): Promise<Region[]> {
+async function getRegionPages(): Promise<RegionPage[]> {
   const regionsCollection = await getCollection("regions");
   const citiesCollection = await getCollection("cities");
   const tribesCollection = await getCollection("tribes");
@@ -42,7 +51,23 @@ async function getRegions(): Promise<Region[]> {
     }));
 }
 
-async function getLegends(): Promise<Page[]> {
+async function getPantheonPages(): Promise<PantheonPages> {
+  const pantheon = await getPantheon();
+
+  const mapToPage = (deity: CollectionEntry<"pantheon">) => ({
+    title: deity.data.title,
+    href: `/pantheon/${deity.slug}`,
+  });
+
+  return {
+    good: pantheon.good.map(mapToPage),
+    neutral: pantheon.neutral.map(mapToPage),
+    evil: pantheon.evil.map(mapToPage),
+    lostPower: pantheon.lostPower.map(mapToPage),
+  };
+}
+
+async function getLegendPages(): Promise<Page[]> {
   const legendsCollection = await getCollection("legends");
 
   return legendsCollection
@@ -53,12 +78,14 @@ async function getLegends(): Promise<Page[]> {
     }));
 }
 
-export async function getPageHierarchy(): Promise<Root> {
-  const regions = await getRegions();
-  const legends = await getLegends();
+export async function getPageHierarchy(): Promise<RootPage> {
+  const regions = await getRegionPages();
+  const pantheon = await getPantheonPages();
+  const legends = await getLegendPages();
 
   return {
     regions,
+    pantheon,
     legends,
   };
 }

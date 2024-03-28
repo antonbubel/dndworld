@@ -1,11 +1,45 @@
 ---
+import { getPantheon } from "src/utils/pantheon";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { Zap } from "lucide-astro";
+import DeitiesList from "@components/pantheon/DeitiesList.astro";
 
 const title = `Божества`;
-const description = `Добро пожаловать в Реневон!`;
+const description = `В мире Реневона боги тесно переплетены с повседневной жизнью его обитателей,
+  наполняя каждый уголок континента своим влиянием и мощью. Небесный пантеон
+  охраняет аспекты природы, жизни, судьбы и морали, в то время как Пантеон
+  Преисподней таит в себе тёмные силы войны, хаоса и разрушения. Боги не
+  только формируют судьбы народов и героев, но и являются непосредственными
+  участниками в истории Реневона, предоставляя своим поклонникам защиту,
+  власть или искушение. Эти божества — от благородных до коварных — определяют
+  ткань мира, в котором сосуществуют магия, вера и судьба.`;
+
+const pantheon = await getPantheon();
 ---
 
 <TextPageLayout {title} {description}>
   <Zap slot="before-title" size={40} />
+  <blockquote>{description}</blockquote>
+
+  <h2>Общая информация</h2>
+  <p>
+    Помимо Материального Плана в мире Первого света существуют бок обок Небесный
+    План, где обитает весь Небесный пантеон, который старается не вмешиваться в
+    дела Материального Плана, Преисподняя, где плетут свои заговоры Пантеон
+    Преисподней с Асмодеем во главе, Мир Фей, где обитают Могущественные Феи,
+    Астральный и Эфирные планы, о котрых мало что известно, а так же по
+    измерению для каждой из основных стихий: огонь, вода, ветер, земля.
+  </p>
+
+  <h2>Божественный пантеон</h2>
+  <div class="grid grid-cols-1 xl:grid-cols-2">
+    <DeitiesList title="Доброе Мировозрение" deities={pantheon.good} />
+    <DeitiesList title="Нейтральное Мировозрение" deities={pantheon.neutral} />
+    <DeitiesList title="Злое Мировозрение" deities={pantheon.evil} />
+  </div>
+
+  <h2>Прочие</h2>
+  <div>
+    <DeitiesList title="Утратили Божественность" deities={pantheon.lostPower} />
+  </div>
 </TextPageLayout>

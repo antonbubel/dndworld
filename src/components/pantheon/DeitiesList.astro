@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+import DeityLink from "./DeityLink.astro";
+
+interface Props {
+  title: string;
+  deities: CollectionEntry<"pantheon">[];
+}
+
+const { title, deities } = Astro.props;
+---
+
+<div>
+  <h3>{title}:</h3>
+  {
+    deities?.length > 0 && (
+      <ol>
+        {deities.map((deity) => (
+          <li>
+            <DeityLink deity={deity} />
+            <br />
+            <span class="font-semibold">Домен:</span> {deity.data.domain}
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</div>
