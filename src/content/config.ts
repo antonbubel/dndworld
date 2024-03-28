@@ -37,6 +37,8 @@ const pantheonCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     nature: z.enum(["good", "neutral", "evil"]),
+    lostPowers: z.boolean().optional(),
+    note: z.string().optional(),
     domain: z.string(),
     symbol: z.string(),
     sortOrder: z.number(),
