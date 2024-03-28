@@ -3,6 +3,7 @@ title: "Терра"
 nature: "good"
 domain: "Земля и Урожай"
 symbol: "Венок из колосьев"
+image: "/pantheon/terra.webp"
 sortOrder: 2
 ---
 

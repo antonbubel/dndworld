@@ -3,6 +3,7 @@ title: "Люмин"
 nature: "good"
 domain: "Свет и Надежда"
 symbol: "Сияющее солнце"
+image: "/pantheon/lumin.webp"
 sortOrder: 1
 ---
 
