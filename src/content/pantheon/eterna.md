@@ -3,6 +3,7 @@ title: "Этерна"
 nature: "good"
 domain: "Любовь и Красота"
 symbol: "Роза на Четырехконечной Звезде"
+image: "/pantheon/eterna.webp"
 sortOrder: 4
 ---
 

@@ -3,6 +3,7 @@ title: "Бал"
 nature: "evil"
 domain: "Убийство и Кровь"
 symbol: "Окроваленый кинжал"
+image: "/pantheon/bal.webp"
 sortOrder: 9
 ---
 

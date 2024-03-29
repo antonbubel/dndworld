@@ -3,6 +3,7 @@ title: "Танатос"
 nature: "neutral"
 domain: "Смерть"
 symbol: "Монета с Черепом и Цветком"
+image: "/pantheon/tanatos.webp"
 sortOrder: 13
 ---
 

@@ -3,6 +3,7 @@ title: "Иллундар"
 nature: "good"
 domain: "Благородство, Защита, Исцеление"
 symbol: "Дракон с Расправленными Крыльями"
+image: "/pantheon/illundar.webp"
 sortOrder: 5
 ---
 

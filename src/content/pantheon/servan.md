@@ -3,6 +3,7 @@ title: "Серван"
 nature: "evil"
 domain: "Разрушение и Хаос"
 symbol: "Разноцветный Ромб"
+image: "/pantheon/servan.webp"
 sortOrder: 7
 ---
 

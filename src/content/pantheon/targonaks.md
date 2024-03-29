@@ -3,6 +3,7 @@ title: "Таргонакс"
 nature: "evil"
 domain: "Власть и Тирания"
 symbol: "Плеть"
+image: "/pantheon/targonaks.webp"
 sortOrder: 8
 ---
 

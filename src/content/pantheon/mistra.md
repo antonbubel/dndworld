@@ -3,6 +3,7 @@ title: "Мистра"
 nature: "neutral"
 domain: "Магия"
 symbol: "Змей Уроборос"
+image: "/pantheon/mistra.webp"
 sortOrder: 14
 ---
 

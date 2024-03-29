@@ -3,6 +3,7 @@ title: "Тифон"
 nature: "neutral"
 domain: "Вода, Океаны и Моря"
 symbol: "Щупальце в форме капли"
+image: "/pantheon/tifon.webp"
 sortOrder: 12
 ---
 

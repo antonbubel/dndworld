@@ -3,6 +3,7 @@ title: "Сильван"
 nature: "good"
 domain: "Природа и Леса"
 symbol: "Корни дуба"
+image: "/pantheon/silvan.webp"
 sortOrder: 3
 ---
 

@@ -3,6 +3,7 @@ title: "Миркул"
 nature: "evil"
 domain: "Вечность и Некромантия"
 symbol: "Гниющий Череп"
+image: "/pantheon/mirkul.webp"
 sortOrder: 21
 lostPowers: true
 note: "Убит"
