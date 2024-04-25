@@ -3,6 +3,7 @@ title: "Елоустоун"
 size: "big"
 region: "bright-coast"
 sortOrder: 2
+mapPath: "/yellowstone-map"
 ---
 
 В Елоустоуне сейчас :равит

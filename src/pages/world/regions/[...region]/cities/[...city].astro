@@ -2,6 +2,9 @@
 import { getCollection } from "astro:content";
 import TextPageLayout from "@layouts/TextPageLayout.astro";
 import RegionLink from "@components/world/RegionLink.astro";
+import { Map as MapIcon } from "lucide-astro";
+
+import "ol/ol.css";
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -46,6 +49,63 @@ const description = `${city.data.title} - город в регионе ${region.
       </>
     )
   }
-  <div class="divider"></div>
   <Content />
+  {
+    city.data.mapPath && (
+      <>
+        <div class="flex items-center gap-3 mb-6">
+          <MapIcon size={30} />
+          <h3 class="my-0">Карта города:</h3>
+        </div>
+        <div id="city-map" class="map h-[40rem]" />
+      </>
+    )
+  }
+  <div class="divider"></div>
 </TextPageLayout>
+
+<script data-astro-rerun define:vars={{ mapPath: city.data.mapPath }}>
+  document.currentMapPath = mapPath;
+</script>
+
+<script>
+  import Map from "ol/Map";
+  import View from "ol/View";
+  import TileLayer from "ol/layer/Tile";
+  import TileGrid from "ol/tilegrid/TileGrid";
+  import XYZ from "ol/source/XYZ";
+  import { FullScreen, defaults as defaultControls } from "ol/control";
+
+  function createMap() {
+    new Map({
+      target: "city-map",
+      controls: defaultControls().extend([new FullScreen()]),
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            tileGrid: new TileGrid({
+              extent: [0, -1536, 2048, 0],
+              origin: [0, -1536],
+              resolutions: [8, 4, 2, 1],
+              tileSize: [256, 256],
+            }),
+            tileUrlFunction: function (tileCoord) {
+              return `${document.currentMapPath}/{z}/{x}/{y}.png`
+                .replace("{z}", String(tileCoord[0]))
+                .replace("{x}", String(tileCoord[1]))
+                .replace("{y}", String(-1 - tileCoord[2]));
+            },
+          }),
+        }),
+      ],
+      view: new View({
+        center: [1024.0, -768.0],
+        resolution: 1.3,
+      }),
+    });
+  }
+
+  createMap();
+
+  document.addEventListener("astro:after-swap", createMap);
+</script>

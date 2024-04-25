@@ -19,6 +19,7 @@ const citiesCollection = defineCollection({
     sortOrder: z.number(),
     region: z.string(),
     image: z.string().optional(),
+    mapPath: z.string().optional(),
   }),
 });
 
