@@ -90,7 +90,7 @@ const description = `${city.data.title} - город в регионе ${region.
               tileSize: [256, 256],
             }),
             tileUrlFunction: function (tileCoord) {
-              return `${document.currentMapPath}/{z}/{x}/{y}.png`
+              return `${(document as any).currentMapPath}/{z}/{x}/{y}.png`
                 .replace("{z}", String(tileCoord[0]))
                 .replace("{x}", String(tileCoord[1]))
                 .replace("{y}", String(-1 - tileCoord[2]));
