@@ -12,9 +12,9 @@
       <name>0/0/0.png</name>
       <Region>
         <LatLonAltBox>
-          <north>512.00000000000000</north>
-          <south>-1536.00000000000000</south>
-          <east>2048.00000000000000</east>
+          <north>1024.00000000000000</north>
+          <south>-3072.00000000000000</south>
+          <east>4096.00000000000000</east>
           <west>0.00000000000000</west>
         </LatLonAltBox>
         <Lod>

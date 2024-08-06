@@ -42,9 +42,9 @@
                             source: new ol.source.TileImage({
                                 attributions: '',
                                 tileGrid: new ol.tilegrid.TileGrid({
-                                    extent: [0,-1536,2048,0],
-                                    origin: [0,-1536],
-                                    resolutions: [8,4,2,1],
+                                    extent: [0,-3072,4096,0],
+                                    origin: [0,-3072],
+                                    resolutions: [16,8,4,2,1],
                                     tileSize: [256, 256]
                                 }),
                                 tileUrlFunction: function(tileCoord) {
@@ -59,8 +59,8 @@
                 }),
             ],
             view: new ol.View({
-                center: [1024.000000, -768.000000],
-                resolution: 1.400000,
+                center: [2048.000000, -1536.000000],
+                resolution: 16.000000,
             })
         });
     </script>
