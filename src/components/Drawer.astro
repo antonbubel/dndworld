@@ -9,6 +9,7 @@ import {
   Zap,
   NotebookText,
   Skull,
+  CalendarDays,
 } from "lucide-astro";
 
 import Swords from "./icons/Swords.astro";
@@ -128,6 +129,23 @@ const pageHierarchy = await getPageHierarchy();
                     }
                   </ul>
                 </details>
+              </li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary><CalendarDays /> Календарь</summary>
+            <ul>
+              <li>
+                <a aria-label="Общая информация о летоисчислении" href="/calendar">
+                  Общая информация
+                </a>
+              </li>
+              <li>
+                <a aria-label="Информация о праздниках Реневона" href="/calendar/holidays">
+                  Праздники
+                </a>
               </li>
             </ul>
           </details>
