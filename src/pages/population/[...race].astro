@@ -1,0 +1,21 @@
+---
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const populationCollection = await getCollection("population");
+
+  return populationCollection.map((race) => ({
+    params: { race: race.slug },
+    props: { race },
+  }));
+}
+
+const { race } = Astro.props;
+const { Content } = await race.render();
+---
+
+<TextPageLayout title={race.data.title} image={race.data.image}>
+  <Content />
+</TextPageLayout>

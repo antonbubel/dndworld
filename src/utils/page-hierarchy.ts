@@ -5,6 +5,8 @@ export interface RootPage {
   regions: RegionPage[];
   pantheon: PantheonPages;
   hells: Page[];
+  population: Page[];
+  bestiary: Page[];
   legends: Page[];
 }
 
@@ -79,6 +81,27 @@ async function getHellsPages(): Promise<Page[]> {
     }));
 }
 
+async function getPopulationPages(): Promise<Page[]> {
+  const populationCollection = await getCollection("population");
+
+  return populationCollection
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map((race) => ({
+      title: race.data.title,
+      href: `/population/${race.slug}`,
+    }));
+}
+
+async function getBestiaryPages(): Promise<Page[]> {
+  const bestiaryCollection = await getCollection("bestiary");
+
+  return bestiaryCollection
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map((beast) => ({
+      title: beast.data.title,
+      href: `/bestiary/${beast.slug}`,
+    }));
+}
 
 async function getLegendPages(): Promise<Page[]> {
   const legendsCollection = await getCollection("legends");
@@ -95,12 +118,16 @@ export async function getPageHierarchy(): Promise<RootPage> {
   const regions = await getRegionPages();
   const pantheon = await getPantheonPages();
   const hells = await getHellsPages();
+  const population = await getPopulationPages();
+  const bestiary = await getBestiaryPages();
   const legends = await getLegendPages();
 
   return {
     regions,
     pantheon,
     hells,
+    population,
+    bestiary,
     legends,
   };
 }

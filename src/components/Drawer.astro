@@ -137,12 +137,18 @@ const pageHierarchy = await getPageHierarchy();
             <summary><CalendarDays /> Календарь</summary>
             <ul>
               <li>
-                <a aria-label="Общая информация о летоисчислении" href="/calendar">
+                <a
+                  aria-label="Общая информация о летоисчислении"
+                  href="/calendar"
+                >
                   Общая информация
                 </a>
               </li>
               <li>
-                <a aria-label="Информация о праздниках Реневона" href="/calendar/holidays">
+                <a
+                  aria-label="Информация о праздниках Реневона"
+                  href="/calendar/holidays"
+                >
                   Праздники
                 </a>
               </li>
@@ -205,10 +211,36 @@ const pageHierarchy = await getPageHierarchy();
           </details>
         </li>
         <li>
-          <a href="/population"><UsersRound /> Население </a>
+          <details>
+            <summary><UsersRound /> Население</summary>
+            <ul>
+              {
+                pageHierarchy.population.map(({ title: pageTitle, href }) => (
+                  <li>
+                    <a aria-label={pageTitle} {href}>
+                      {pageTitle}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
         </li>
         <li>
-          <a href="/bestiary"><PawPrint /> Бестиарий </a>
+          <details>
+            <summary><PawPrint /> Бестиарий</summary>
+            <ul>
+              {
+                pageHierarchy.bestiary.map(({ title: pageTitle, href }) => (
+                  <li>
+                    <a aria-label={pageTitle} {href}>
+                      {pageTitle}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
         </li>
         <li>
           <details>
@@ -255,7 +287,7 @@ const pageHierarchy = await getPageHierarchy();
 
   function openClosedDetails(
     childElement: Element,
-    stopElement: Element | null = null,
+    stopElement: Element | null = null
   ) {
     const parentElement = childElement.parentElement;
 

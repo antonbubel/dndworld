@@ -59,6 +59,24 @@ const hellsCollection = defineCollection({
   }),
 });
 
+const populationCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
+const bestiaryCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
 const legendsCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -74,5 +92,7 @@ export const collections = {
   tribes: tribesCollection,
   pantheon: pantheonCollection,
   hells: hellsCollection,
+  population: populationCollection,
+  bestiary: bestiaryCollection,
   legends: legendsCollection,
 };

@@ -1,0 +1,21 @@
+---
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const bestiaryCollection = await getCollection("bestiary");
+
+  return bestiaryCollection.map((beast) => ({
+    params: { beast: beast.slug },
+    props: { beast },
+  }));
+}
+
+const { beast } = Astro.props;
+const { Content } = await beast.render();
+---
+
+<TextPageLayout title={beast.data.title} image={beast.data.image}>
+  <Content />
+</TextPageLayout>
