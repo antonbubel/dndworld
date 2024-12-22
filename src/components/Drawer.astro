@@ -8,6 +8,7 @@ import {
   LibraryBig,
   Zap,
   NotebookText,
+  Skull,
 } from "lucide-astro";
 
 import Swords from "./icons/Swords.astro";
@@ -169,6 +170,24 @@ const pageHierarchy = await getPageHierarchy();
           </details>
         </li>
         <li>
+          <details>
+            <summary><Skull /> Преисподняя</summary>
+            <ul>
+              <li>
+                <a aria-label="Общая информация о преисподнии" href="/hells">
+                  Общая информация
+                </a>
+              </li>
+              <li>
+                <PagesMenu
+                  title="Пантеон преисподней"
+                  pages={pageHierarchy.hells}
+                />
+              </li>
+            </ul>
+          </details>
+        </li>
+        <li>
           <a href="/population"><UsersRound /> Население </a>
         </li>
         <li>
@@ -224,7 +243,7 @@ const pageHierarchy = await getPageHierarchy();
 
   function openClosedDetails(
     childElement: Element,
-    stopElement: Element | null = null
+    stopElement: Element | null = null,
   ) {
     const parentElement = childElement.parentElement;
 

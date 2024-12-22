@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from "astro:content";
+import HellsLink from "./HellsLink.astro";
+import { getCircleName } from "src/utils/hells";
+
+interface Props {
+  title: string;
+  hells: CollectionEntry<"hells">[];
+}
+
+const { title, hells } = Astro.props;
+---
+
+<div>
+  <h3>{title}:</h3>
+  {
+    hells?.length > 0 && (
+      <ol>
+        {hells.map((hellsEntry) => (
+          <li>
+            <HellsLink hellsEntry={hellsEntry} />
+            <div class="text-xs">
+              {hellsEntry.data.domain && (
+                <>
+                  <span class="font-semibold">Домен:</span>{" "}
+                  {hellsEntry.data.domain}
+                </>
+              )}
+              {hellsEntry.data.symbol && (
+                <>
+                  <br />
+                  <span class="font-semibold">Символ:</span>{" "}
+                  {hellsEntry.data.symbol}
+                </>
+              )}
+              {hellsEntry.data.circle && (
+                <>
+                  <br />
+                  <span class="font-semibold">Круг:</span>{" "}
+                  {getCircleName(hellsEntry.data.circle)}{" "}
+                  <span>({hellsEntry.data.circle} круг)</span>
+                </>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</div>

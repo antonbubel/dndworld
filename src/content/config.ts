@@ -47,6 +47,18 @@ const pantheonCollection = defineCollection({
   }),
 });
 
+const hellsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    domain: z.string(),
+    symbol: z.string(),
+    circle: z.number(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
 const legendsCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -61,5 +73,6 @@ export const collections = {
   cities: citiesCollection,
   tribes: tribesCollection,
   pantheon: pantheonCollection,
+  heels: hellsCollection,
   legends: legendsCollection,
 };

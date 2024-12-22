@@ -1,0 +1,55 @@
+---
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import { getCollection } from "astro:content";
+import { getCircleName } from "src/utils/hells";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const hellsCollection = await getCollection("hells");
+
+  return hellsCollection.map((hellsEntry) => ({
+    params: { hellsEntry: hellsEntry.slug },
+    props: { hellsEntry },
+  }));
+}
+
+const { hellsEntry } = Astro.props;
+const { Content } = await hellsEntry.render();
+---
+
+<TextPageLayout title={hellsEntry.data.title} image={hellsEntry.data.image}>
+  {
+    hellsEntry.data.domain && (
+      <p>
+        <span class="font-bold">Домен</span>
+        <br />
+        {hellsEntry.data.domain}
+      </p>
+    )
+  }
+
+  {
+    hellsEntry.data.symbol && (
+      <p>
+        <span class="font-bold">Символ</span>
+        <br />
+        {hellsEntry.data.symbol}
+      </p>
+    )
+  }
+
+  {
+    hellsEntry.data.circle && (
+      <p>
+        <span class="font-bold">Круг Преисподней</span>
+        <br />
+        {getCircleName(hellsEntry.data.circle)}{" "}
+        <span>({hellsEntry.data.circle} круг)</span>
+      </p>
+    )
+  }
+
+  <div class="divider"></div>
+
+  <Content />
+</TextPageLayout>

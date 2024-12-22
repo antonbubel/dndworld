@@ -4,6 +4,7 @@ import { getPantheon } from "./pantheon";
 export interface RootPage {
   regions: RegionPage[];
   pantheon: PantheonPages;
+  hells: Page[];
   legends: Page[];
 }
 
@@ -67,6 +68,18 @@ async function getPantheonPages(): Promise<PantheonPages> {
   };
 }
 
+async function getHellsPages(): Promise<Page[]> {
+  const hellsCollection = await getCollection("hells");
+
+  return hellsCollection
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map((hellsEntry) => ({
+      title: hellsEntry.data.title,
+      href: `/hells/${hellsEntry.slug}`,
+    }));
+}
+
+
 async function getLegendPages(): Promise<Page[]> {
   const legendsCollection = await getCollection("legends");
 
@@ -81,11 +94,13 @@ async function getLegendPages(): Promise<Page[]> {
 export async function getPageHierarchy(): Promise<RootPage> {
   const regions = await getRegionPages();
   const pantheon = await getPantheonPages();
+  const hells = await getHellsPages();
   const legends = await getLegendPages();
 
   return {
     regions,
     pantheon,
+    hells,
     legends,
   };
 }
