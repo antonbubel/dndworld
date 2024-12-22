@@ -3,6 +3,7 @@ title: "Гондар"
 nature: "neutral"
 domain: "Кузнесное дело и Ремесло"
 symbol: "Молот и Наковальня"
+image: "/pantheon/gondar.webp"
 sortOrder: 20
 ---
 

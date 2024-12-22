@@ -3,6 +3,7 @@ title: "Крон"
 nature: "neutral"
 domain: "Время и Cудьба"
 symbol: "Песочные Часы"
+image: "/pantheon/kron.webp"
 sortOrder: 15
 ---
 

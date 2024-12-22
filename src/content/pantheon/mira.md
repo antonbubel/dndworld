@@ -3,6 +3,7 @@ title: "Мира"
 nature: "good"
 domain: "Дом и Уют"
 symbol: "Очаг"
+image: "/pantheon/mira.webp"
 sortOrder: 6
 ---
 

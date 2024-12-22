@@ -5,6 +5,7 @@ domain: "Тьма"
 symbol: "Полумесяц"
 sortOrder: 22
 lostPowers: true
+image: "/pantheon/dikstra.webp"
 note: "Утратила силы"
 ---
 

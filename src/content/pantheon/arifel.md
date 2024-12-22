@@ -3,6 +3,7 @@ title: "Арифель"
 nature: "neutral"
 domain: "Творчество и Искусство"
 symbol: "Лира Окруженная Венком"
+image: "/pantheon/arifel.webp"
 sortOrder: 17
 ---
 

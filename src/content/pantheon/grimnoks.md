@@ -3,6 +3,7 @@ title: "Гримнокс"
 nature: "neutral"
 domain: "Знание и Баланс"
 symbol: "Книга"
+image: "/pantheon/grimnoks.webp"
 sortOrder: 18
 ---
 

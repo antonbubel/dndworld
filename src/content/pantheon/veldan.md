@@ -3,6 +3,7 @@ title: "Велдан"
 nature: "neutral"
 domain: "Ветер и Путешествия"
 symbol: "Чайка"
+image: "/pantheon/veldan.webp"
 sortOrder: 16
 ---
 

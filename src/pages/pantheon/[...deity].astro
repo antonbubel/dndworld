@@ -24,17 +24,35 @@ const { Content } = await deity.render();
     {getNature(deity)}
   </p>
 
-  <p>
-    <span class="font-bold">Домен</span>
-    <br />
-    {deity.data.domain}
-  </p>
+  {
+    deity.data.domain && (
+      <p>
+        <span class="font-bold">Домен</span>
+        <br />
+        {deity.data.domain}
+      </p>
+    )
+  }
 
-  <p>
-    <span class="font-bold">Символ</span>
-    <br />
-    {deity.data.symbol}
-  </p>
+  {
+    deity.data.symbol && (
+      <p>
+        <span class="font-bold">Символ</span>
+        <br />
+        {deity.data.symbol}
+      </p>
+    )
+  }
+
+  {
+    deity.data.note && (
+      <p>
+        <span class="font-bold">Примечания</span>
+        <br />
+        {deity.data.note}
+      </p>
+    )
+  }
 
   <div class="divider"></div>
 

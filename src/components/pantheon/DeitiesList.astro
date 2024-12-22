@@ -18,8 +18,26 @@ const { title, deities } = Astro.props;
         {deities.map((deity) => (
           <li>
             <DeityLink deity={deity} />
-            <br />
-            <span class="font-semibold">Домен:</span> {deity.data.domain}
+            <div class="text-xs">
+              {deity.data.domain && (
+                <>
+                  <span class="font-semibold">Домен:</span> {deity.data.domain}
+                </>
+              )}
+              {deity.data.symbol && (
+                <>
+                  <br />
+                  <span class="font-semibold">Символ:</span> {deity.data.symbol}
+                </>
+              )}
+              {deity.data.note && (
+                <>
+                  <br />
+                  <span class="font-semibold">Примечания:</span>{" "}
+                  {deity.data.note}
+                </>
+              )}
+            </div>
           </li>
         ))}
       </ol>

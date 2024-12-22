@@ -3,6 +3,7 @@ title: "Кургал"
 nature: "evil"
 domain: "Война"
 symbol: "Расколотый меч"
+image: "/pantheon/kurgal.webp"
 sortOrder: 10
 ---
 

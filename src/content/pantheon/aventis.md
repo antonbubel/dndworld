@@ -3,6 +3,7 @@ title: "Авентис"
 nature: "neutral"
 domain: "Торговля и Хитрость"
 symbol: "Чаша"
+image: "/pantheon/aventis.webp"
 sortOrder: 19
 ---
 

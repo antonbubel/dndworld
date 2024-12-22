@@ -3,6 +3,7 @@ title: "Ллолс"
 nature: "evil"
 domain: "Тьма и Пауки"
 symbol: "Чёрная вдова"
+image: "/pantheon/llos.webp"
 sortOrder: 11
 ---
 
