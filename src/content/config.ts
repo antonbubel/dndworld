@@ -52,7 +52,7 @@ const hellsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     domain: z.string(),
-    symbol: z.string(),
+    symbol: z.string().optional(),
     circle: z.number(),
     sortOrder: z.number(),
     image: z.string().optional(),
@@ -73,6 +73,6 @@ export const collections = {
   cities: citiesCollection,
   tribes: tribesCollection,
   pantheon: pantheonCollection,
-  heels: hellsCollection,
+  hells: hellsCollection,
   legends: legendsCollection,
 };

@@ -1,5 +1,4 @@
 ---
-import { getPantheon } from "src/utils/pantheon";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { Skull } from "lucide-astro";
 import HellsList from "@components/hells/HellsList.astro";
@@ -17,9 +16,9 @@ const description = `Девять Преисподних Баатора будо
 кто-то его свергнет, он будет править всем планом. Таков закон Девяти
 Преисподних.`;
 
-const hells = await (
-  await getCollection("hells")
-).sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const hells = (await getCollection("hells")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
 ---
 
 <TextPageLayout {title} {description} image="/hells/nine-hells.webp">
