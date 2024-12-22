@@ -6,6 +6,7 @@ export interface RootPage {
   pantheon: PantheonPages;
   hells: Page[];
   population: Page[];
+  guilds: Page[];
   bestiary: Page[];
   legends: Page[];
 }
@@ -92,6 +93,17 @@ async function getPopulationPages(): Promise<Page[]> {
     }));
 }
 
+async function getGuildsPages(): Promise<Page[]> {
+  const guildsCollection = await getCollection("guilds");
+
+  return guildsCollection
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map((guild) => ({
+      title: guild.data.title,
+      href: `/guilds/${guild.slug}`,
+    }));
+}
+
 async function getBestiaryPages(): Promise<Page[]> {
   const bestiaryCollection = await getCollection("bestiary");
 
@@ -119,6 +131,7 @@ export async function getPageHierarchy(): Promise<RootPage> {
   const pantheon = await getPantheonPages();
   const hells = await getHellsPages();
   const population = await getPopulationPages();
+  const guilds = await getGuildsPages();
   const bestiary = await getBestiaryPages();
   const legends = await getLegendPages();
 
@@ -127,6 +140,7 @@ export async function getPageHierarchy(): Promise<RootPage> {
     pantheon,
     hells,
     population,
+    guilds,
     bestiary,
     legends,
   };

@@ -68,6 +68,15 @@ const populationCollection = defineCollection({
   }),
 });
 
+const guildsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    sortOrder: z.number(),
+    image: z.string().optional(),
+  }),
+});
+
 const bestiaryCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -93,6 +102,7 @@ export const collections = {
   pantheon: pantheonCollection,
   hells: hellsCollection,
   population: populationCollection,
+  guilds: guildsCollection,
   bestiary: bestiaryCollection,
   legends: legendsCollection,
 };

@@ -9,6 +9,7 @@ import {
   Zap,
   Skull,
   CalendarDays,
+  Landmark,
 } from "lucide-astro";
 
 import Swords from "./icons/Swords.astro";
@@ -216,6 +217,22 @@ const pageHierarchy = await getPageHierarchy();
             <ul>
               {
                 pageHierarchy.population.map(({ title: pageTitle, href }) => (
+                  <li>
+                    <a aria-label={pageTitle} {href}>
+                      {pageTitle}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary><Landmark /> Гильдии</summary>
+            <ul>
+              {
+                pageHierarchy.guilds.map(({ title: pageTitle, href }) => (
                   <li>
                     <a aria-label={pageTitle} {href}>
                       {pageTitle}

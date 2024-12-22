@@ -1,0 +1,21 @@
+---
+import TextPageLayout from "@layouts/TextPageLayout.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const guilsdCollection = await getCollection("guilds");
+
+  return guilsdCollection.map((guild) => ({
+    params: { guild: guild.slug },
+    props: { guild },
+  }));
+}
+
+const { guild } = Astro.props;
+const { Content } = await guild.render();
+---
+
+<TextPageLayout title={guild.data.title} image={guild.data.image}>
+  <Content />
+</TextPageLayout>
