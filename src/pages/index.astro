@@ -1,4 +1,5 @@
 ---
+import { Dices, Skull } from "lucide-astro";
 import TextPageLayout from "../layouts/TextPageLayout.astro";
 
 const title = `Добро пожаловать в Реневон!`;
@@ -10,4 +11,26 @@ const description = `Эта Вики содержит всю информаци�
     На этом сайте ты найдёшь всю информацию о Первом Свете и всю информацию о
     том, что в нём есть.
   </p>
+
+  <h3>Игровые ссылки:</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <a
+      href="https://t.me/+C0evoHzPuDkyODhi"
+      target="_blank"
+      class="btn flex items-center gap-3"
+    >
+      <Skull />
+      <span>Войти в посмертие</span>
+      <Skull />
+    </a>
+    <a
+      href="https://dnd.su/"
+      target="_blank"
+      class="btn flex items-center gap-3"
+    >
+      <Dices />
+      <span>DnD.su</span>
+      <Dices />
+    </a>
+  </div>
 </TextPageLayout>
