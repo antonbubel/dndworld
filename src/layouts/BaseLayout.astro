@@ -5,9 +5,10 @@ import "@fontsource-variable/montserrat";
 import "../global.css";
 
 import { defaultTheme } from "../utils/themes";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 import Drawer from "../components/Drawer.astro";
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -42,7 +43,8 @@ const { title, image, description } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <ViewTransitions />
+    <ClientRouter />
+    <Analytics />
   </head>
 
   <body class="relative w-screen min-h-screen">

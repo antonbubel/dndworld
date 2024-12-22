@@ -17,6 +17,7 @@
     "@fontsource-variable/montserrat": "^5.1.0",
     "@fontsource/cormorant-sc": "^5.1.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@vercel/analytics": "^1.4.1",
     "astro": "^5.1.1",
     "lucide-astro": "^0.469.0",
     "ol": "^10.3.1",
